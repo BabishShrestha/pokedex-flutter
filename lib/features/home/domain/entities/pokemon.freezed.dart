@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Pokemon {
 
- List<Ability> get abilities; int? get baseExperience; List<Species> get forms; List<GameIndex> get gameIndices; int get height; List<HeldItem> get heldItems; int get id; bool get isDefault; String get locationAreaEncounters; List<Move> get moves; String get name; int get order; List<dynamic>? get pastTypes; Species get species; Sprites get sprites; List<Stat> get stats; List<Type> get types; int get weight;
+ List<Ability> get abilities; int? get baseExperience; List<Species> get forms; List<GameIndex> get gameIndices; int get height; List<HeldItem> get heldItems; int get id; bool get isDefault; String get locationAreaEncounters; List<Move> get moves; String get name; int get order; List<dynamic> get pastTypes; Species get species; Sprites get sprites; List<Stat> get stats; List<Type> get types; int get weight;
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PokemonCopyWith<$Res>  {
   factory $PokemonCopyWith(Pokemon value, $Res Function(Pokemon) _then) = _$PokemonCopyWithImpl;
 @useResult
 $Res call({
- List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex> gameIndices, int height, List<HeldItem> heldItems, int id, bool isDefault, String locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic>? pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
+ List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex> gameIndices, int height, List<HeldItem> heldItems, int id, bool isDefault, String locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic> pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
 });
 
 
@@ -65,7 +65,7 @@ class _$PokemonCopyWithImpl<$Res>
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = null,Object? height = null,Object? heldItems = null,Object? id = null,Object? isDefault = null,Object? locationAreaEncounters = null,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = freezed,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = null,Object? height = null,Object? heldItems = null,Object? id = null,Object? isDefault = null,Object? locationAreaEncounters = null,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = null,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
   return _then(_self.copyWith(
 abilities: null == abilities ? _self.abilities : abilities // ignore: cast_nullable_to_non_nullable
 as List<Ability>,baseExperience: freezed == baseExperience ? _self.baseExperience : baseExperience // ignore: cast_nullable_to_non_nullable
@@ -79,8 +79,8 @@ as bool,locationAreaEncounters: null == locationAreaEncounters ? _self.locationA
 as String,moves: null == moves ? _self.moves : moves // ignore: cast_nullable_to_non_nullable
 as List<Move>,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as int,pastTypes: freezed == pastTypes ? _self.pastTypes : pastTypes // ignore: cast_nullable_to_non_nullable
-as List<dynamic>?,species: null == species ? _self.species : species // ignore: cast_nullable_to_non_nullable
+as int,pastTypes: null == pastTypes ? _self.pastTypes : pastTypes // ignore: cast_nullable_to_non_nullable
+as List<dynamic>,species: null == species ? _self.species : species // ignore: cast_nullable_to_non_nullable
 as Species,sprites: null == sprites ? _self.sprites : sprites // ignore: cast_nullable_to_non_nullable
 as Sprites,stats: null == stats ? _self.stats : stats // ignore: cast_nullable_to_non_nullable
 as List<Stat>,types: null == types ? _self.types : types // ignore: cast_nullable_to_non_nullable
@@ -188,7 +188,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic>? pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Pokemon() when $default != null:
 return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndices,_that.height,_that.heldItems,_that.id,_that.isDefault,_that.locationAreaEncounters,_that.moves,_that.name,_that.order,_that.pastTypes,_that.species,_that.sprites,_that.stats,_that.types,_that.weight);case _:
@@ -209,7 +209,7 @@ return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndic
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic>? pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)  $default,) {final _that = this;
 switch (_that) {
 case _Pokemon():
 return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndices,_that.height,_that.heldItems,_that.id,_that.isDefault,_that.locationAreaEncounters,_that.moves,_that.name,_that.order,_that.pastTypes,_that.species,_that.sprites,_that.stats,_that.types,_that.weight);case _:
@@ -229,7 +229,7 @@ return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndic
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic>? pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,) {final _that = this;
 switch (_that) {
 case _Pokemon() when $default != null:
 return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndices,_that.height,_that.heldItems,_that.id,_that.isDefault,_that.locationAreaEncounters,_that.moves,_that.name,_that.order,_that.pastTypes,_that.species,_that.sprites,_that.stats,_that.types,_that.weight);case _:
@@ -244,7 +244,7 @@ return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndic
 @JsonSerializable()
 
 class _Pokemon implements Pokemon {
-  const _Pokemon({required final  List<Ability> abilities, required this.baseExperience, required final  List<Species> forms, required final  List<GameIndex> gameIndices, required this.height, required final  List<HeldItem> heldItems, required this.id, required this.isDefault, required this.locationAreaEncounters, required final  List<Move> moves, required this.name, required this.order, required final  List<dynamic>? pastTypes, required this.species, required this.sprites, required final  List<Stat> stats, required final  List<Type> types, required this.weight}): _abilities = abilities,_forms = forms,_gameIndices = gameIndices,_heldItems = heldItems,_moves = moves,_pastTypes = pastTypes,_stats = stats,_types = types;
+  const _Pokemon({required final  List<Ability> abilities, this.baseExperience, required final  List<Species> forms, required final  List<GameIndex> gameIndices, required this.height, required final  List<HeldItem> heldItems, required this.id, required this.isDefault, required this.locationAreaEncounters, required final  List<Move> moves, required this.name, required this.order, final  List<dynamic> pastTypes = const [], required this.species, required this.sprites, required final  List<Stat> stats, required final  List<Type> types, required this.weight}): _abilities = abilities,_forms = forms,_gameIndices = gameIndices,_heldItems = heldItems,_moves = moves,_pastTypes = pastTypes,_stats = stats,_types = types;
   factory _Pokemon.fromJson(Map<String, dynamic> json) => _$PokemonFromJson(json);
 
  final  List<Ability> _abilities;
@@ -289,13 +289,11 @@ class _Pokemon implements Pokemon {
 
 @override final  String name;
 @override final  int order;
- final  List<dynamic>? _pastTypes;
-@override List<dynamic>? get pastTypes {
-  final value = _pastTypes;
-  if (value == null) return null;
+ final  List<dynamic> _pastTypes;
+@override@JsonKey() List<dynamic> get pastTypes {
   if (_pastTypes is EqualUnmodifiableListView) return _pastTypes;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
+  return EqualUnmodifiableListView(_pastTypes);
 }
 
 @override final  Species species;
@@ -349,7 +347,7 @@ abstract mixin class _$PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
   factory _$PokemonCopyWith(_Pokemon value, $Res Function(_Pokemon) _then) = __$PokemonCopyWithImpl;
 @override @useResult
 $Res call({
- List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex> gameIndices, int height, List<HeldItem> heldItems, int id, bool isDefault, String locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic>? pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
+ List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex> gameIndices, int height, List<HeldItem> heldItems, int id, bool isDefault, String locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic> pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
 });
 
 
@@ -366,7 +364,7 @@ class __$PokemonCopyWithImpl<$Res>
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = null,Object? height = null,Object? heldItems = null,Object? id = null,Object? isDefault = null,Object? locationAreaEncounters = null,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = freezed,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = null,Object? height = null,Object? heldItems = null,Object? id = null,Object? isDefault = null,Object? locationAreaEncounters = null,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = null,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
   return _then(_Pokemon(
 abilities: null == abilities ? _self._abilities : abilities // ignore: cast_nullable_to_non_nullable
 as List<Ability>,baseExperience: freezed == baseExperience ? _self.baseExperience : baseExperience // ignore: cast_nullable_to_non_nullable
@@ -380,8 +378,8 @@ as bool,locationAreaEncounters: null == locationAreaEncounters ? _self.locationA
 as String,moves: null == moves ? _self._moves : moves // ignore: cast_nullable_to_non_nullable
 as List<Move>,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as int,pastTypes: freezed == pastTypes ? _self._pastTypes : pastTypes // ignore: cast_nullable_to_non_nullable
-as List<dynamic>?,species: null == species ? _self.species : species // ignore: cast_nullable_to_non_nullable
+as int,pastTypes: null == pastTypes ? _self._pastTypes : pastTypes // ignore: cast_nullable_to_non_nullable
+as List<dynamic>,species: null == species ? _self.species : species // ignore: cast_nullable_to_non_nullable
 as Species,sprites: null == sprites ? _self.sprites : sprites // ignore: cast_nullable_to_non_nullable
 as Sprites,stats: null == stats ? _self._stats : stats // ignore: cast_nullable_to_non_nullable
 as List<Stat>,types: null == types ? _self._types : types // ignore: cast_nullable_to_non_nullable

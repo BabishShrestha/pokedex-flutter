@@ -29,7 +29,7 @@ _Pokemon _$PokemonFromJson(Map<String, dynamic> json) => _Pokemon(
       .toList(),
   name: json['name'] as String,
   order: (json['order'] as num).toInt(),
-  pastTypes: json['pastTypes'] as List<dynamic>?,
+  pastTypes: json['pastTypes'] as List<dynamic>? ?? const [],
   species: Species.fromJson(json['species'] as Map<String, dynamic>),
   sprites: Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
   stats: (json['stats'] as List<dynamic>)
