@@ -18,7 +18,7 @@ String pokemonToJson(Pokemon data) => json.encode(data.toJson());
 abstract class Pokemon with _$Pokemon {
   const factory Pokemon({
     required List<Ability> abilities,
-    required int baseExperience,
+    int? baseExperience,
     required List<Species> forms,
     required List<GameIndex> gameIndices,
     required int height,
@@ -29,7 +29,7 @@ abstract class Pokemon with _$Pokemon {
     required List<Move> moves,
     required String name,
     required int order,
-    required List<dynamic> pastTypes,
+    @Default([]) List<dynamic> pastTypes,
     required Species species,
     required Sprites sprites,
     required List<Stat> stats,
@@ -40,9 +40,6 @@ abstract class Pokemon with _$Pokemon {
   factory Pokemon.fromJson(Map<String, dynamic> json) =>
       _$PokemonFromJson(json);
 }
-
-
-
 
 @freezed
 abstract class HeldItem with _$HeldItem {
@@ -57,10 +54,8 @@ abstract class HeldItem with _$HeldItem {
 
 @freezed
 abstract class VersionDetail with _$VersionDetail {
-  const factory VersionDetail({
-    required int rarity,
-    required Species version,
-  }) = _VersionDetail;
+  const factory VersionDetail({required int rarity, required Species version}) =
+      _VersionDetail;
 
   factory VersionDetail.fromJson(Map<String, dynamic> json) =>
       _$VersionDetailFromJson(json);
@@ -90,9 +85,7 @@ abstract class VersionGroupDetail with _$VersionGroupDetail {
 
 @freezed
 abstract class GenerationV with _$GenerationV {
-  const factory GenerationV({
-    required Sprites blackWhite,
-  }) = _GenerationV;
+  const factory GenerationV({required Sprites blackWhite}) = _GenerationV;
 
   factory GenerationV.fromJson(Map<String, dynamic> json) =>
       _$GenerationVFromJson(json);
@@ -130,17 +123,17 @@ abstract class Versions with _$Versions {
 @freezed
 abstract class Sprites with _$Sprites {
   const factory Sprites({
-    required String backDefault,
+    required String? backDefault,
     required dynamic backFemale,
-    required String backShiny,
+    required String? backShiny,
     required dynamic backShinyFemale,
-    required String frontDefault,
+    required String? frontDefault,
     required dynamic frontFemale,
-    required String frontShiny,
+    required String? frontShiny,
     required dynamic frontShinyFemale,
-    required Other other,
-    required Versions versions,
-    required Sprites animated,
+    required Other? other,
+    required Versions? versions,
+    required Sprites? animated,
   }) = _Sprites;
 
   factory Sprites.fromJson(Map<String, dynamic> json) =>
@@ -274,9 +267,7 @@ abstract class DreamWorld with _$DreamWorld {
 
 @freezed
 abstract class GenerationViii with _$GenerationViii {
-  const factory GenerationViii({
-    required DreamWorld icons,
-  }) = _GenerationViii;
+  const factory GenerationViii({required DreamWorld icons}) = _GenerationViii;
 
   factory GenerationViii.fromJson(Map<String, dynamic> json) =>
       _$GenerationViiiFromJson(json);
@@ -295,9 +286,8 @@ abstract class Other with _$Other {
 
 @freezed
 abstract class OfficialArtwork with _$OfficialArtwork {
-  const factory OfficialArtwork({
-    required String frontDefault,
-  }) = _OfficialArtwork;
+  const factory OfficialArtwork({required String? frontDefault}) =
+      _OfficialArtwork;
 
   factory OfficialArtwork.fromJson(Map<String, dynamic> json) =>
       _$OfficialArtworkFromJson(json);
@@ -316,10 +306,7 @@ abstract class Stat with _$Stat {
 
 @freezed
 abstract class Type with _$Type {
-  const factory Type({
-    required int slot,
-    required Species type,
-  }) = _Type;
+  const factory Type({required int slot, required Species type}) = _Type;
 
   factory Type.fromJson(Map<String, dynamic> json) => _$TypeFromJson(json);
 }

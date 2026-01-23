@@ -1,13 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pokedex/features/home/domain/entities/species.dart';
 
 part 'ability.freezed.dart';
 part 'ability.g.dart';
+
 @freezed
- class Ability with _$Ability {
+abstract class Ability with _$Ability {
   const factory Ability({
-    required String name,
-    required String url,
-    required bool isHidden,
+    required Species ability,
+    bool? isHidden,
     required int slot,
   }) = _Ability;
 

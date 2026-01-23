@@ -6,17 +6,14 @@ part of 'ability.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Ability _$$_AbilityFromJson(Map<String, dynamic> json) => _$_Ability(
-      name: json['name'] as String,
-      url: json['url'] as String,
-      isHidden: json['isHidden'] as bool,
-      slot: json['slot'] as int,
-    );
+_Ability _$AbilityFromJson(Map<String, dynamic> json) => _Ability(
+  ability: Species.fromJson(json['ability'] as Map<String, dynamic>),
+  isHidden: json['isHidden'] as bool?,
+  slot: (json['slot'] as num).toInt(),
+);
 
-Map<String, dynamic> _$$_AbilityToJson(_$_Ability instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'url': instance.url,
-      'isHidden': instance.isHidden,
-      'slot': instance.slot,
-    };
+Map<String, dynamic> _$AbilityToJson(_Ability instance) => <String, dynamic>{
+  'ability': instance.ability,
+  'isHidden': instance.isHidden,
+  'slot': instance.slot,
+};
