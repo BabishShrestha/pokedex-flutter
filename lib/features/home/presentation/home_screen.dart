@@ -24,16 +24,16 @@ class HomeScreen extends ConsumerWidget {
                   String? imageUrl;
                   try {
                     // Try official artwork first
-                    if (pokemon.sprites.other?.officialArtwork.frontDefault !=
+                    if (pokemon.sprites.other?.officialArtwork?.frontDefault !=
                             null &&
                         pokemon
                             .sprites
                             .other!
-                            .officialArtwork
+                            .officialArtwork!
                             .frontDefault!
                             .isNotEmpty) {
                       imageUrl =
-                          pokemon.sprites.other!.officialArtwork.frontDefault;
+                          pokemon.sprites.other!.officialArtwork!.frontDefault;
                     }
                     // Fall back to standard front sprite
                     else if (pokemon.sprites.frontDefault != null &&

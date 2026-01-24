@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Pokemon {
 
- List<Ability> get abilities; int? get baseExperience; List<Species> get forms; List<GameIndex> get gameIndices; int get height; List<HeldItem> get heldItems; int get id; bool get isDefault; String get locationAreaEncounters; List<Move> get moves; String get name; int get order; List<dynamic> get pastTypes; Species get species; Sprites get sprites; List<Stat> get stats; List<Type> get types; int get weight;
+ List<Ability> get abilities; int? get baseExperience; List<Species> get forms; List<GameIndex>? get gameIndices; int get height; List<HeldItem>? get heldItems; int get id; bool? get isDefault; String? get locationAreaEncounters; List<Move> get moves; String get name; int get order; List<dynamic> get pastTypes; Species get species; Sprites get sprites; List<Stat> get stats; List<Type> get types; int get weight;
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PokemonCopyWith<$Res>  {
   factory $PokemonCopyWith(Pokemon value, $Res Function(Pokemon) _then) = _$PokemonCopyWithImpl;
 @useResult
 $Res call({
- List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex> gameIndices, int height, List<HeldItem> heldItems, int id, bool isDefault, String locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic> pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
+ List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex>? gameIndices, int height, List<HeldItem>? heldItems, int id, bool? isDefault, String? locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic> pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
 });
 
 
@@ -65,18 +65,18 @@ class _$PokemonCopyWithImpl<$Res>
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = null,Object? height = null,Object? heldItems = null,Object? id = null,Object? isDefault = null,Object? locationAreaEncounters = null,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = null,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = freezed,Object? height = null,Object? heldItems = freezed,Object? id = null,Object? isDefault = freezed,Object? locationAreaEncounters = freezed,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = null,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
   return _then(_self.copyWith(
 abilities: null == abilities ? _self.abilities : abilities // ignore: cast_nullable_to_non_nullable
 as List<Ability>,baseExperience: freezed == baseExperience ? _self.baseExperience : baseExperience // ignore: cast_nullable_to_non_nullable
 as int?,forms: null == forms ? _self.forms : forms // ignore: cast_nullable_to_non_nullable
-as List<Species>,gameIndices: null == gameIndices ? _self.gameIndices : gameIndices // ignore: cast_nullable_to_non_nullable
-as List<GameIndex>,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
-as int,heldItems: null == heldItems ? _self.heldItems : heldItems // ignore: cast_nullable_to_non_nullable
-as List<HeldItem>,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,isDefault: null == isDefault ? _self.isDefault : isDefault // ignore: cast_nullable_to_non_nullable
-as bool,locationAreaEncounters: null == locationAreaEncounters ? _self.locationAreaEncounters : locationAreaEncounters // ignore: cast_nullable_to_non_nullable
-as String,moves: null == moves ? _self.moves : moves // ignore: cast_nullable_to_non_nullable
+as List<Species>,gameIndices: freezed == gameIndices ? _self.gameIndices : gameIndices // ignore: cast_nullable_to_non_nullable
+as List<GameIndex>?,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,heldItems: freezed == heldItems ? _self.heldItems : heldItems // ignore: cast_nullable_to_non_nullable
+as List<HeldItem>?,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,isDefault: freezed == isDefault ? _self.isDefault : isDefault // ignore: cast_nullable_to_non_nullable
+as bool?,locationAreaEncounters: freezed == locationAreaEncounters ? _self.locationAreaEncounters : locationAreaEncounters // ignore: cast_nullable_to_non_nullable
+as String?,moves: null == moves ? _self.moves : moves // ignore: cast_nullable_to_non_nullable
 as List<Move>,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as int,pastTypes: null == pastTypes ? _self.pastTypes : pastTypes // ignore: cast_nullable_to_non_nullable
@@ -188,7 +188,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex>? gameIndices,  int height,  List<HeldItem>? heldItems,  int id,  bool? isDefault,  String? locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Pokemon() when $default != null:
 return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndices,_that.height,_that.heldItems,_that.id,_that.isDefault,_that.locationAreaEncounters,_that.moves,_that.name,_that.order,_that.pastTypes,_that.species,_that.sprites,_that.stats,_that.types,_that.weight);case _:
@@ -209,7 +209,7 @@ return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndic
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex>? gameIndices,  int height,  List<HeldItem>? heldItems,  int id,  bool? isDefault,  String? locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)  $default,) {final _that = this;
 switch (_that) {
 case _Pokemon():
 return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndices,_that.height,_that.heldItems,_that.id,_that.isDefault,_that.locationAreaEncounters,_that.moves,_that.name,_that.order,_that.pastTypes,_that.species,_that.sprites,_that.stats,_that.types,_that.weight);case _:
@@ -229,7 +229,7 @@ return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndic
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex> gameIndices,  int height,  List<HeldItem> heldItems,  int id,  bool isDefault,  String locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Ability> abilities,  int? baseExperience,  List<Species> forms,  List<GameIndex>? gameIndices,  int height,  List<HeldItem>? heldItems,  int id,  bool? isDefault,  String? locationAreaEncounters,  List<Move> moves,  String name,  int order,  List<dynamic> pastTypes,  Species species,  Sprites sprites,  List<Stat> stats,  List<Type> types,  int weight)?  $default,) {final _that = this;
 switch (_that) {
 case _Pokemon() when $default != null:
 return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndices,_that.height,_that.heldItems,_that.id,_that.isDefault,_that.locationAreaEncounters,_that.moves,_that.name,_that.order,_that.pastTypes,_that.species,_that.sprites,_that.stats,_that.types,_that.weight);case _:
@@ -244,7 +244,7 @@ return $default(_that.abilities,_that.baseExperience,_that.forms,_that.gameIndic
 @JsonSerializable()
 
 class _Pokemon implements Pokemon {
-  const _Pokemon({required final  List<Ability> abilities, this.baseExperience, required final  List<Species> forms, required final  List<GameIndex> gameIndices, required this.height, required final  List<HeldItem> heldItems, required this.id, required this.isDefault, required this.locationAreaEncounters, required final  List<Move> moves, required this.name, required this.order, final  List<dynamic> pastTypes = const [], required this.species, required this.sprites, required final  List<Stat> stats, required final  List<Type> types, required this.weight}): _abilities = abilities,_forms = forms,_gameIndices = gameIndices,_heldItems = heldItems,_moves = moves,_pastTypes = pastTypes,_stats = stats,_types = types;
+  const _Pokemon({required final  List<Ability> abilities, this.baseExperience, required final  List<Species> forms, required final  List<GameIndex>? gameIndices, required this.height, required final  List<HeldItem>? heldItems, required this.id, required this.isDefault, required this.locationAreaEncounters, required final  List<Move> moves, required this.name, required this.order, final  List<dynamic> pastTypes = const [], required this.species, required this.sprites, required final  List<Stat> stats, required final  List<Type> types, required this.weight}): _abilities = abilities,_forms = forms,_gameIndices = gameIndices,_heldItems = heldItems,_moves = moves,_pastTypes = pastTypes,_stats = stats,_types = types;
   factory _Pokemon.fromJson(Map<String, dynamic> json) => _$PokemonFromJson(json);
 
  final  List<Ability> _abilities;
@@ -262,24 +262,28 @@ class _Pokemon implements Pokemon {
   return EqualUnmodifiableListView(_forms);
 }
 
- final  List<GameIndex> _gameIndices;
-@override List<GameIndex> get gameIndices {
+ final  List<GameIndex>? _gameIndices;
+@override List<GameIndex>? get gameIndices {
+  final value = _gameIndices;
+  if (value == null) return null;
   if (_gameIndices is EqualUnmodifiableListView) return _gameIndices;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_gameIndices);
+  return EqualUnmodifiableListView(value);
 }
 
 @override final  int height;
- final  List<HeldItem> _heldItems;
-@override List<HeldItem> get heldItems {
+ final  List<HeldItem>? _heldItems;
+@override List<HeldItem>? get heldItems {
+  final value = _heldItems;
+  if (value == null) return null;
   if (_heldItems is EqualUnmodifiableListView) return _heldItems;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_heldItems);
+  return EqualUnmodifiableListView(value);
 }
 
 @override final  int id;
-@override final  bool isDefault;
-@override final  String locationAreaEncounters;
+@override final  bool? isDefault;
+@override final  String? locationAreaEncounters;
  final  List<Move> _moves;
 @override List<Move> get moves {
   if (_moves is EqualUnmodifiableListView) return _moves;
@@ -347,7 +351,7 @@ abstract mixin class _$PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
   factory _$PokemonCopyWith(_Pokemon value, $Res Function(_Pokemon) _then) = __$PokemonCopyWithImpl;
 @override @useResult
 $Res call({
- List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex> gameIndices, int height, List<HeldItem> heldItems, int id, bool isDefault, String locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic> pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
+ List<Ability> abilities, int? baseExperience, List<Species> forms, List<GameIndex>? gameIndices, int height, List<HeldItem>? heldItems, int id, bool? isDefault, String? locationAreaEncounters, List<Move> moves, String name, int order, List<dynamic> pastTypes, Species species, Sprites sprites, List<Stat> stats, List<Type> types, int weight
 });
 
 
@@ -364,18 +368,18 @@ class __$PokemonCopyWithImpl<$Res>
 
 /// Create a copy of Pokemon
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = null,Object? height = null,Object? heldItems = null,Object? id = null,Object? isDefault = null,Object? locationAreaEncounters = null,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = null,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? abilities = null,Object? baseExperience = freezed,Object? forms = null,Object? gameIndices = freezed,Object? height = null,Object? heldItems = freezed,Object? id = null,Object? isDefault = freezed,Object? locationAreaEncounters = freezed,Object? moves = null,Object? name = null,Object? order = null,Object? pastTypes = null,Object? species = null,Object? sprites = null,Object? stats = null,Object? types = null,Object? weight = null,}) {
   return _then(_Pokemon(
 abilities: null == abilities ? _self._abilities : abilities // ignore: cast_nullable_to_non_nullable
 as List<Ability>,baseExperience: freezed == baseExperience ? _self.baseExperience : baseExperience // ignore: cast_nullable_to_non_nullable
 as int?,forms: null == forms ? _self._forms : forms // ignore: cast_nullable_to_non_nullable
-as List<Species>,gameIndices: null == gameIndices ? _self._gameIndices : gameIndices // ignore: cast_nullable_to_non_nullable
-as List<GameIndex>,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
-as int,heldItems: null == heldItems ? _self._heldItems : heldItems // ignore: cast_nullable_to_non_nullable
-as List<HeldItem>,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,isDefault: null == isDefault ? _self.isDefault : isDefault // ignore: cast_nullable_to_non_nullable
-as bool,locationAreaEncounters: null == locationAreaEncounters ? _self.locationAreaEncounters : locationAreaEncounters // ignore: cast_nullable_to_non_nullable
-as String,moves: null == moves ? _self._moves : moves // ignore: cast_nullable_to_non_nullable
+as List<Species>,gameIndices: freezed == gameIndices ? _self._gameIndices : gameIndices // ignore: cast_nullable_to_non_nullable
+as List<GameIndex>?,height: null == height ? _self.height : height // ignore: cast_nullable_to_non_nullable
+as int,heldItems: freezed == heldItems ? _self._heldItems : heldItems // ignore: cast_nullable_to_non_nullable
+as List<HeldItem>?,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,isDefault: freezed == isDefault ? _self.isDefault : isDefault // ignore: cast_nullable_to_non_nullable
+as bool?,locationAreaEncounters: freezed == locationAreaEncounters ? _self.locationAreaEncounters : locationAreaEncounters // ignore: cast_nullable_to_non_nullable
+as String?,moves: null == moves ? _self._moves : moves // ignore: cast_nullable_to_non_nullable
 as List<Move>,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as int,pastTypes: null == pastTypes ? _self._pastTypes : pastTypes // ignore: cast_nullable_to_non_nullable
@@ -987,7 +991,7 @@ $SpeciesCopyWith<$Res> get version {
 /// @nodoc
 mixin _$Move {
 
- Species get move; List<VersionGroupDetail> get versionGroupDetails;
+ Species get move; List<VersionGroupDetail>? get versionGroupDetails;
 /// Create a copy of Move
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1020,7 +1024,7 @@ abstract mixin class $MoveCopyWith<$Res>  {
   factory $MoveCopyWith(Move value, $Res Function(Move) _then) = _$MoveCopyWithImpl;
 @useResult
 $Res call({
- Species move, List<VersionGroupDetail> versionGroupDetails
+ Species move, List<VersionGroupDetail>? versionGroupDetails
 });
 
 
@@ -1037,11 +1041,11 @@ class _$MoveCopyWithImpl<$Res>
 
 /// Create a copy of Move
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? move = null,Object? versionGroupDetails = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? move = null,Object? versionGroupDetails = freezed,}) {
   return _then(_self.copyWith(
 move: null == move ? _self.move : move // ignore: cast_nullable_to_non_nullable
-as Species,versionGroupDetails: null == versionGroupDetails ? _self.versionGroupDetails : versionGroupDetails // ignore: cast_nullable_to_non_nullable
-as List<VersionGroupDetail>,
+as Species,versionGroupDetails: freezed == versionGroupDetails ? _self.versionGroupDetails : versionGroupDetails // ignore: cast_nullable_to_non_nullable
+as List<VersionGroupDetail>?,
   ));
 }
 /// Create a copy of Move
@@ -1135,7 +1139,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Species move,  List<VersionGroupDetail> versionGroupDetails)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Species move,  List<VersionGroupDetail>? versionGroupDetails)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Move() when $default != null:
 return $default(_that.move,_that.versionGroupDetails);case _:
@@ -1156,7 +1160,7 @@ return $default(_that.move,_that.versionGroupDetails);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Species move,  List<VersionGroupDetail> versionGroupDetails)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Species move,  List<VersionGroupDetail>? versionGroupDetails)  $default,) {final _that = this;
 switch (_that) {
 case _Move():
 return $default(_that.move,_that.versionGroupDetails);case _:
@@ -1176,7 +1180,7 @@ return $default(_that.move,_that.versionGroupDetails);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Species move,  List<VersionGroupDetail> versionGroupDetails)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Species move,  List<VersionGroupDetail>? versionGroupDetails)?  $default,) {final _that = this;
 switch (_that) {
 case _Move() when $default != null:
 return $default(_that.move,_that.versionGroupDetails);case _:
@@ -1191,15 +1195,17 @@ return $default(_that.move,_that.versionGroupDetails);case _:
 @JsonSerializable()
 
 class _Move implements Move {
-  const _Move({required this.move, required final  List<VersionGroupDetail> versionGroupDetails}): _versionGroupDetails = versionGroupDetails;
+  const _Move({required this.move, required final  List<VersionGroupDetail>? versionGroupDetails}): _versionGroupDetails = versionGroupDetails;
   factory _Move.fromJson(Map<String, dynamic> json) => _$MoveFromJson(json);
 
 @override final  Species move;
- final  List<VersionGroupDetail> _versionGroupDetails;
-@override List<VersionGroupDetail> get versionGroupDetails {
+ final  List<VersionGroupDetail>? _versionGroupDetails;
+@override List<VersionGroupDetail>? get versionGroupDetails {
+  final value = _versionGroupDetails;
+  if (value == null) return null;
   if (_versionGroupDetails is EqualUnmodifiableListView) return _versionGroupDetails;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_versionGroupDetails);
+  return EqualUnmodifiableListView(value);
 }
 
 
@@ -1236,7 +1242,7 @@ abstract mixin class _$MoveCopyWith<$Res> implements $MoveCopyWith<$Res> {
   factory _$MoveCopyWith(_Move value, $Res Function(_Move) _then) = __$MoveCopyWithImpl;
 @override @useResult
 $Res call({
- Species move, List<VersionGroupDetail> versionGroupDetails
+ Species move, List<VersionGroupDetail>? versionGroupDetails
 });
 
 
@@ -1253,11 +1259,11 @@ class __$MoveCopyWithImpl<$Res>
 
 /// Create a copy of Move
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? move = null,Object? versionGroupDetails = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? move = null,Object? versionGroupDetails = freezed,}) {
   return _then(_Move(
 move: null == move ? _self.move : move // ignore: cast_nullable_to_non_nullable
-as Species,versionGroupDetails: null == versionGroupDetails ? _self._versionGroupDetails : versionGroupDetails // ignore: cast_nullable_to_non_nullable
-as List<VersionGroupDetail>,
+as Species,versionGroupDetails: freezed == versionGroupDetails ? _self._versionGroupDetails : versionGroupDetails // ignore: cast_nullable_to_non_nullable
+as List<VersionGroupDetail>?,
   ));
 }
 
@@ -2186,7 +2192,7 @@ $SpritesCopyWith<$Res> get platinum {
 /// @nodoc
 mixin _$Versions {
 
- GenerationI get generationI; GenerationIi get generationIi; GenerationIii get generationIii; GenerationIv get generationIv; GenerationV get generationV; Map<String, Home> get generationVi; GenerationVii get generationVii; GenerationViii get generationViii;
+ GenerationI? get generationI; GenerationIi? get generationIi; GenerationIii? get generationIii; GenerationIv? get generationIv; GenerationV? get generationV; Map<String, Home>? get generationVi; GenerationVii? get generationVii; GenerationViii? get generationViii;
 /// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2219,11 +2225,11 @@ abstract mixin class $VersionsCopyWith<$Res>  {
   factory $VersionsCopyWith(Versions value, $Res Function(Versions) _then) = _$VersionsCopyWithImpl;
 @useResult
 $Res call({
- GenerationI generationI, GenerationIi generationIi, GenerationIii generationIii, GenerationIv generationIv, GenerationV generationV, Map<String, Home> generationVi, GenerationVii generationVii, GenerationViii generationViii
+ GenerationI? generationI, GenerationIi? generationIi, GenerationIii? generationIii, GenerationIv? generationIv, GenerationV? generationV, Map<String, Home>? generationVi, GenerationVii? generationVii, GenerationViii? generationViii
 });
 
 
-$GenerationICopyWith<$Res> get generationI;$GenerationIiCopyWith<$Res> get generationIi;$GenerationIiiCopyWith<$Res> get generationIii;$GenerationIvCopyWith<$Res> get generationIv;$GenerationVCopyWith<$Res> get generationV;$GenerationViiCopyWith<$Res> get generationVii;$GenerationViiiCopyWith<$Res> get generationViii;
+$GenerationICopyWith<$Res>? get generationI;$GenerationIiCopyWith<$Res>? get generationIi;$GenerationIiiCopyWith<$Res>? get generationIii;$GenerationIvCopyWith<$Res>? get generationIv;$GenerationVCopyWith<$Res>? get generationV;$GenerationViiCopyWith<$Res>? get generationVii;$GenerationViiiCopyWith<$Res>? get generationViii;
 
 }
 /// @nodoc
@@ -2236,80 +2242,101 @@ class _$VersionsCopyWithImpl<$Res>
 
 /// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? generationI = null,Object? generationIi = null,Object? generationIii = null,Object? generationIv = null,Object? generationV = null,Object? generationVi = null,Object? generationVii = null,Object? generationViii = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? generationI = freezed,Object? generationIi = freezed,Object? generationIii = freezed,Object? generationIv = freezed,Object? generationV = freezed,Object? generationVi = freezed,Object? generationVii = freezed,Object? generationViii = freezed,}) {
   return _then(_self.copyWith(
-generationI: null == generationI ? _self.generationI : generationI // ignore: cast_nullable_to_non_nullable
-as GenerationI,generationIi: null == generationIi ? _self.generationIi : generationIi // ignore: cast_nullable_to_non_nullable
-as GenerationIi,generationIii: null == generationIii ? _self.generationIii : generationIii // ignore: cast_nullable_to_non_nullable
-as GenerationIii,generationIv: null == generationIv ? _self.generationIv : generationIv // ignore: cast_nullable_to_non_nullable
-as GenerationIv,generationV: null == generationV ? _self.generationV : generationV // ignore: cast_nullable_to_non_nullable
-as GenerationV,generationVi: null == generationVi ? _self.generationVi : generationVi // ignore: cast_nullable_to_non_nullable
-as Map<String, Home>,generationVii: null == generationVii ? _self.generationVii : generationVii // ignore: cast_nullable_to_non_nullable
-as GenerationVii,generationViii: null == generationViii ? _self.generationViii : generationViii // ignore: cast_nullable_to_non_nullable
-as GenerationViii,
+generationI: freezed == generationI ? _self.generationI : generationI // ignore: cast_nullable_to_non_nullable
+as GenerationI?,generationIi: freezed == generationIi ? _self.generationIi : generationIi // ignore: cast_nullable_to_non_nullable
+as GenerationIi?,generationIii: freezed == generationIii ? _self.generationIii : generationIii // ignore: cast_nullable_to_non_nullable
+as GenerationIii?,generationIv: freezed == generationIv ? _self.generationIv : generationIv // ignore: cast_nullable_to_non_nullable
+as GenerationIv?,generationV: freezed == generationV ? _self.generationV : generationV // ignore: cast_nullable_to_non_nullable
+as GenerationV?,generationVi: freezed == generationVi ? _self.generationVi : generationVi // ignore: cast_nullable_to_non_nullable
+as Map<String, Home>?,generationVii: freezed == generationVii ? _self.generationVii : generationVii // ignore: cast_nullable_to_non_nullable
+as GenerationVii?,generationViii: freezed == generationViii ? _self.generationViii : generationViii // ignore: cast_nullable_to_non_nullable
+as GenerationViii?,
   ));
 }
 /// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationICopyWith<$Res> get generationI {
-  
-  return $GenerationICopyWith<$Res>(_self.generationI, (value) {
+$GenerationICopyWith<$Res>? get generationI {
+    if (_self.generationI == null) {
+    return null;
+  }
+
+  return $GenerationICopyWith<$Res>(_self.generationI!, (value) {
     return _then(_self.copyWith(generationI: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationIiCopyWith<$Res> get generationIi {
-  
-  return $GenerationIiCopyWith<$Res>(_self.generationIi, (value) {
+$GenerationIiCopyWith<$Res>? get generationIi {
+    if (_self.generationIi == null) {
+    return null;
+  }
+
+  return $GenerationIiCopyWith<$Res>(_self.generationIi!, (value) {
     return _then(_self.copyWith(generationIi: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationIiiCopyWith<$Res> get generationIii {
-  
-  return $GenerationIiiCopyWith<$Res>(_self.generationIii, (value) {
+$GenerationIiiCopyWith<$Res>? get generationIii {
+    if (_self.generationIii == null) {
+    return null;
+  }
+
+  return $GenerationIiiCopyWith<$Res>(_self.generationIii!, (value) {
     return _then(_self.copyWith(generationIii: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationIvCopyWith<$Res> get generationIv {
-  
-  return $GenerationIvCopyWith<$Res>(_self.generationIv, (value) {
+$GenerationIvCopyWith<$Res>? get generationIv {
+    if (_self.generationIv == null) {
+    return null;
+  }
+
+  return $GenerationIvCopyWith<$Res>(_self.generationIv!, (value) {
     return _then(_self.copyWith(generationIv: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationVCopyWith<$Res> get generationV {
-  
-  return $GenerationVCopyWith<$Res>(_self.generationV, (value) {
+$GenerationVCopyWith<$Res>? get generationV {
+    if (_self.generationV == null) {
+    return null;
+  }
+
+  return $GenerationVCopyWith<$Res>(_self.generationV!, (value) {
     return _then(_self.copyWith(generationV: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationViiCopyWith<$Res> get generationVii {
-  
-  return $GenerationViiCopyWith<$Res>(_self.generationVii, (value) {
+$GenerationViiCopyWith<$Res>? get generationVii {
+    if (_self.generationVii == null) {
+    return null;
+  }
+
+  return $GenerationViiCopyWith<$Res>(_self.generationVii!, (value) {
     return _then(_self.copyWith(generationVii: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationViiiCopyWith<$Res> get generationViii {
-  
-  return $GenerationViiiCopyWith<$Res>(_self.generationViii, (value) {
+$GenerationViiiCopyWith<$Res>? get generationViii {
+    if (_self.generationViii == null) {
+    return null;
+  }
+
+  return $GenerationViiiCopyWith<$Res>(_self.generationViii!, (value) {
     return _then(_self.copyWith(generationViii: value));
   });
 }
@@ -2394,7 +2421,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( GenerationI generationI,  GenerationIi generationIi,  GenerationIii generationIii,  GenerationIv generationIv,  GenerationV generationV,  Map<String, Home> generationVi,  GenerationVii generationVii,  GenerationViii generationViii)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( GenerationI? generationI,  GenerationIi? generationIi,  GenerationIii? generationIii,  GenerationIv? generationIv,  GenerationV? generationV,  Map<String, Home>? generationVi,  GenerationVii? generationVii,  GenerationViii? generationViii)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Versions() when $default != null:
 return $default(_that.generationI,_that.generationIi,_that.generationIii,_that.generationIv,_that.generationV,_that.generationVi,_that.generationVii,_that.generationViii);case _:
@@ -2415,7 +2442,7 @@ return $default(_that.generationI,_that.generationIi,_that.generationIii,_that.g
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( GenerationI generationI,  GenerationIi generationIi,  GenerationIii generationIii,  GenerationIv generationIv,  GenerationV generationV,  Map<String, Home> generationVi,  GenerationVii generationVii,  GenerationViii generationViii)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( GenerationI? generationI,  GenerationIi? generationIi,  GenerationIii? generationIii,  GenerationIv? generationIv,  GenerationV? generationV,  Map<String, Home>? generationVi,  GenerationVii? generationVii,  GenerationViii? generationViii)  $default,) {final _that = this;
 switch (_that) {
 case _Versions():
 return $default(_that.generationI,_that.generationIi,_that.generationIii,_that.generationIv,_that.generationV,_that.generationVi,_that.generationVii,_that.generationViii);case _:
@@ -2435,7 +2462,7 @@ return $default(_that.generationI,_that.generationIi,_that.generationIii,_that.g
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( GenerationI generationI,  GenerationIi generationIi,  GenerationIii generationIii,  GenerationIv generationIv,  GenerationV generationV,  Map<String, Home> generationVi,  GenerationVii generationVii,  GenerationViii generationViii)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( GenerationI? generationI,  GenerationIi? generationIi,  GenerationIii? generationIii,  GenerationIv? generationIv,  GenerationV? generationV,  Map<String, Home>? generationVi,  GenerationVii? generationVii,  GenerationViii? generationViii)?  $default,) {final _that = this;
 switch (_that) {
 case _Versions() when $default != null:
 return $default(_that.generationI,_that.generationIi,_that.generationIii,_that.generationIv,_that.generationV,_that.generationVi,_that.generationVii,_that.generationViii);case _:
@@ -2450,23 +2477,25 @@ return $default(_that.generationI,_that.generationIi,_that.generationIii,_that.g
 @JsonSerializable()
 
 class _Versions implements Versions {
-  const _Versions({required this.generationI, required this.generationIi, required this.generationIii, required this.generationIv, required this.generationV, required final  Map<String, Home> generationVi, required this.generationVii, required this.generationViii}): _generationVi = generationVi;
+  const _Versions({this.generationI, this.generationIi, this.generationIii, this.generationIv, this.generationV, final  Map<String, Home>? generationVi, this.generationVii, this.generationViii}): _generationVi = generationVi;
   factory _Versions.fromJson(Map<String, dynamic> json) => _$VersionsFromJson(json);
 
-@override final  GenerationI generationI;
-@override final  GenerationIi generationIi;
-@override final  GenerationIii generationIii;
-@override final  GenerationIv generationIv;
-@override final  GenerationV generationV;
- final  Map<String, Home> _generationVi;
-@override Map<String, Home> get generationVi {
+@override final  GenerationI? generationI;
+@override final  GenerationIi? generationIi;
+@override final  GenerationIii? generationIii;
+@override final  GenerationIv? generationIv;
+@override final  GenerationV? generationV;
+ final  Map<String, Home>? _generationVi;
+@override Map<String, Home>? get generationVi {
+  final value = _generationVi;
+  if (value == null) return null;
   if (_generationVi is EqualUnmodifiableMapView) return _generationVi;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_generationVi);
+  return EqualUnmodifiableMapView(value);
 }
 
-@override final  GenerationVii generationVii;
-@override final  GenerationViii generationViii;
+@override final  GenerationVii? generationVii;
+@override final  GenerationViii? generationViii;
 
 /// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
@@ -2501,11 +2530,11 @@ abstract mixin class _$VersionsCopyWith<$Res> implements $VersionsCopyWith<$Res>
   factory _$VersionsCopyWith(_Versions value, $Res Function(_Versions) _then) = __$VersionsCopyWithImpl;
 @override @useResult
 $Res call({
- GenerationI generationI, GenerationIi generationIi, GenerationIii generationIii, GenerationIv generationIv, GenerationV generationV, Map<String, Home> generationVi, GenerationVii generationVii, GenerationViii generationViii
+ GenerationI? generationI, GenerationIi? generationIi, GenerationIii? generationIii, GenerationIv? generationIv, GenerationV? generationV, Map<String, Home>? generationVi, GenerationVii? generationVii, GenerationViii? generationViii
 });
 
 
-@override $GenerationICopyWith<$Res> get generationI;@override $GenerationIiCopyWith<$Res> get generationIi;@override $GenerationIiiCopyWith<$Res> get generationIii;@override $GenerationIvCopyWith<$Res> get generationIv;@override $GenerationVCopyWith<$Res> get generationV;@override $GenerationViiCopyWith<$Res> get generationVii;@override $GenerationViiiCopyWith<$Res> get generationViii;
+@override $GenerationICopyWith<$Res>? get generationI;@override $GenerationIiCopyWith<$Res>? get generationIi;@override $GenerationIiiCopyWith<$Res>? get generationIii;@override $GenerationIvCopyWith<$Res>? get generationIv;@override $GenerationVCopyWith<$Res>? get generationV;@override $GenerationViiCopyWith<$Res>? get generationVii;@override $GenerationViiiCopyWith<$Res>? get generationViii;
 
 }
 /// @nodoc
@@ -2518,17 +2547,17 @@ class __$VersionsCopyWithImpl<$Res>
 
 /// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? generationI = null,Object? generationIi = null,Object? generationIii = null,Object? generationIv = null,Object? generationV = null,Object? generationVi = null,Object? generationVii = null,Object? generationViii = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? generationI = freezed,Object? generationIi = freezed,Object? generationIii = freezed,Object? generationIv = freezed,Object? generationV = freezed,Object? generationVi = freezed,Object? generationVii = freezed,Object? generationViii = freezed,}) {
   return _then(_Versions(
-generationI: null == generationI ? _self.generationI : generationI // ignore: cast_nullable_to_non_nullable
-as GenerationI,generationIi: null == generationIi ? _self.generationIi : generationIi // ignore: cast_nullable_to_non_nullable
-as GenerationIi,generationIii: null == generationIii ? _self.generationIii : generationIii // ignore: cast_nullable_to_non_nullable
-as GenerationIii,generationIv: null == generationIv ? _self.generationIv : generationIv // ignore: cast_nullable_to_non_nullable
-as GenerationIv,generationV: null == generationV ? _self.generationV : generationV // ignore: cast_nullable_to_non_nullable
-as GenerationV,generationVi: null == generationVi ? _self._generationVi : generationVi // ignore: cast_nullable_to_non_nullable
-as Map<String, Home>,generationVii: null == generationVii ? _self.generationVii : generationVii // ignore: cast_nullable_to_non_nullable
-as GenerationVii,generationViii: null == generationViii ? _self.generationViii : generationViii // ignore: cast_nullable_to_non_nullable
-as GenerationViii,
+generationI: freezed == generationI ? _self.generationI : generationI // ignore: cast_nullable_to_non_nullable
+as GenerationI?,generationIi: freezed == generationIi ? _self.generationIi : generationIi // ignore: cast_nullable_to_non_nullable
+as GenerationIi?,generationIii: freezed == generationIii ? _self.generationIii : generationIii // ignore: cast_nullable_to_non_nullable
+as GenerationIii?,generationIv: freezed == generationIv ? _self.generationIv : generationIv // ignore: cast_nullable_to_non_nullable
+as GenerationIv?,generationV: freezed == generationV ? _self.generationV : generationV // ignore: cast_nullable_to_non_nullable
+as GenerationV?,generationVi: freezed == generationVi ? _self._generationVi : generationVi // ignore: cast_nullable_to_non_nullable
+as Map<String, Home>?,generationVii: freezed == generationVii ? _self.generationVii : generationVii // ignore: cast_nullable_to_non_nullable
+as GenerationVii?,generationViii: freezed == generationViii ? _self.generationViii : generationViii // ignore: cast_nullable_to_non_nullable
+as GenerationViii?,
   ));
 }
 
@@ -2536,63 +2565,84 @@ as GenerationViii,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationICopyWith<$Res> get generationI {
-  
-  return $GenerationICopyWith<$Res>(_self.generationI, (value) {
+$GenerationICopyWith<$Res>? get generationI {
+    if (_self.generationI == null) {
+    return null;
+  }
+
+  return $GenerationICopyWith<$Res>(_self.generationI!, (value) {
     return _then(_self.copyWith(generationI: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationIiCopyWith<$Res> get generationIi {
-  
-  return $GenerationIiCopyWith<$Res>(_self.generationIi, (value) {
+$GenerationIiCopyWith<$Res>? get generationIi {
+    if (_self.generationIi == null) {
+    return null;
+  }
+
+  return $GenerationIiCopyWith<$Res>(_self.generationIi!, (value) {
     return _then(_self.copyWith(generationIi: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationIiiCopyWith<$Res> get generationIii {
-  
-  return $GenerationIiiCopyWith<$Res>(_self.generationIii, (value) {
+$GenerationIiiCopyWith<$Res>? get generationIii {
+    if (_self.generationIii == null) {
+    return null;
+  }
+
+  return $GenerationIiiCopyWith<$Res>(_self.generationIii!, (value) {
     return _then(_self.copyWith(generationIii: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationIvCopyWith<$Res> get generationIv {
-  
-  return $GenerationIvCopyWith<$Res>(_self.generationIv, (value) {
+$GenerationIvCopyWith<$Res>? get generationIv {
+    if (_self.generationIv == null) {
+    return null;
+  }
+
+  return $GenerationIvCopyWith<$Res>(_self.generationIv!, (value) {
     return _then(_self.copyWith(generationIv: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationVCopyWith<$Res> get generationV {
-  
-  return $GenerationVCopyWith<$Res>(_self.generationV, (value) {
+$GenerationVCopyWith<$Res>? get generationV {
+    if (_self.generationV == null) {
+    return null;
+  }
+
+  return $GenerationVCopyWith<$Res>(_self.generationV!, (value) {
     return _then(_self.copyWith(generationV: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationViiCopyWith<$Res> get generationVii {
-  
-  return $GenerationViiCopyWith<$Res>(_self.generationVii, (value) {
+$GenerationViiCopyWith<$Res>? get generationVii {
+    if (_self.generationVii == null) {
+    return null;
+  }
+
+  return $GenerationViiCopyWith<$Res>(_self.generationVii!, (value) {
     return _then(_self.copyWith(generationVii: value));
   });
 }/// Create a copy of Versions
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GenerationViiiCopyWith<$Res> get generationViii {
-  
-  return $GenerationViiiCopyWith<$Res>(_self.generationViii, (value) {
+$GenerationViiiCopyWith<$Res>? get generationViii {
+    if (_self.generationViii == null) {
+    return null;
+  }
+
+  return $GenerationViiiCopyWith<$Res>(_self.generationViii!, (value) {
     return _then(_self.copyWith(generationViii: value));
   });
 }
@@ -4752,7 +4802,7 @@ $GoldCopyWith<$Res> get rubySapphire {
 /// @nodoc
 mixin _$Emerald {
 
- String get frontDefault; String get frontShiny;
+ String? get frontDefault; String get frontShiny;
 /// Create a copy of Emerald
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -4785,7 +4835,7 @@ abstract mixin class $EmeraldCopyWith<$Res>  {
   factory $EmeraldCopyWith(Emerald value, $Res Function(Emerald) _then) = _$EmeraldCopyWithImpl;
 @useResult
 $Res call({
- String frontDefault, String frontShiny
+ String? frontDefault, String frontShiny
 });
 
 
@@ -4802,10 +4852,10 @@ class _$EmeraldCopyWithImpl<$Res>
 
 /// Create a copy of Emerald
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? frontDefault = null,Object? frontShiny = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? frontDefault = freezed,Object? frontShiny = null,}) {
   return _then(_self.copyWith(
-frontDefault: null == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
-as String,frontShiny: null == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
+frontDefault: freezed == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
+as String?,frontShiny: null == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -4891,7 +4941,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String frontDefault,  String frontShiny)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? frontDefault,  String frontShiny)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Emerald() when $default != null:
 return $default(_that.frontDefault,_that.frontShiny);case _:
@@ -4912,7 +4962,7 @@ return $default(_that.frontDefault,_that.frontShiny);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String frontDefault,  String frontShiny)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? frontDefault,  String frontShiny)  $default,) {final _that = this;
 switch (_that) {
 case _Emerald():
 return $default(_that.frontDefault,_that.frontShiny);case _:
@@ -4932,7 +4982,7 @@ return $default(_that.frontDefault,_that.frontShiny);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String frontDefault,  String frontShiny)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? frontDefault,  String frontShiny)?  $default,) {final _that = this;
 switch (_that) {
 case _Emerald() when $default != null:
 return $default(_that.frontDefault,_that.frontShiny);case _:
@@ -4950,7 +5000,7 @@ class _Emerald implements Emerald {
   const _Emerald({required this.frontDefault, required this.frontShiny});
   factory _Emerald.fromJson(Map<String, dynamic> json) => _$EmeraldFromJson(json);
 
-@override final  String frontDefault;
+@override final  String? frontDefault;
 @override final  String frontShiny;
 
 /// Create a copy of Emerald
@@ -4986,7 +5036,7 @@ abstract mixin class _$EmeraldCopyWith<$Res> implements $EmeraldCopyWith<$Res> {
   factory _$EmeraldCopyWith(_Emerald value, $Res Function(_Emerald) _then) = __$EmeraldCopyWithImpl;
 @override @useResult
 $Res call({
- String frontDefault, String frontShiny
+ String? frontDefault, String frontShiny
 });
 
 
@@ -5003,10 +5053,10 @@ class __$EmeraldCopyWithImpl<$Res>
 
 /// Create a copy of Emerald
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? frontDefault = null,Object? frontShiny = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? frontDefault = freezed,Object? frontShiny = null,}) {
   return _then(_Emerald(
-frontDefault: null == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
-as String,frontShiny: null == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
+frontDefault: freezed == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
+as String?,frontShiny: null == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -5018,7 +5068,7 @@ as String,
 /// @nodoc
 mixin _$Home {
 
- String get frontDefault; dynamic get frontFemale; String get frontShiny; dynamic get frontShinyFemale;
+ String? get frontDefault; dynamic get frontFemale; String? get frontShiny; dynamic get frontShinyFemale;
 /// Create a copy of Home
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5051,7 +5101,7 @@ abstract mixin class $HomeCopyWith<$Res>  {
   factory $HomeCopyWith(Home value, $Res Function(Home) _then) = _$HomeCopyWithImpl;
 @useResult
 $Res call({
- String frontDefault, dynamic frontFemale, String frontShiny, dynamic frontShinyFemale
+ String? frontDefault, dynamic frontFemale, String? frontShiny, dynamic frontShinyFemale
 });
 
 
@@ -5068,12 +5118,12 @@ class _$HomeCopyWithImpl<$Res>
 
 /// Create a copy of Home
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? frontDefault = null,Object? frontFemale = freezed,Object? frontShiny = null,Object? frontShinyFemale = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? frontDefault = freezed,Object? frontFemale = freezed,Object? frontShiny = freezed,Object? frontShinyFemale = freezed,}) {
   return _then(_self.copyWith(
-frontDefault: null == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
-as String,frontFemale: freezed == frontFemale ? _self.frontFemale : frontFemale // ignore: cast_nullable_to_non_nullable
-as dynamic,frontShiny: null == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
-as String,frontShinyFemale: freezed == frontShinyFemale ? _self.frontShinyFemale : frontShinyFemale // ignore: cast_nullable_to_non_nullable
+frontDefault: freezed == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
+as String?,frontFemale: freezed == frontFemale ? _self.frontFemale : frontFemale // ignore: cast_nullable_to_non_nullable
+as dynamic,frontShiny: freezed == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
+as String?,frontShinyFemale: freezed == frontShinyFemale ? _self.frontShinyFemale : frontShinyFemale // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
 }
@@ -5159,7 +5209,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String frontDefault,  dynamic frontFemale,  String frontShiny,  dynamic frontShinyFemale)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? frontDefault,  dynamic frontFemale,  String? frontShiny,  dynamic frontShinyFemale)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Home() when $default != null:
 return $default(_that.frontDefault,_that.frontFemale,_that.frontShiny,_that.frontShinyFemale);case _:
@@ -5180,7 +5230,7 @@ return $default(_that.frontDefault,_that.frontFemale,_that.frontShiny,_that.fron
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String frontDefault,  dynamic frontFemale,  String frontShiny,  dynamic frontShinyFemale)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? frontDefault,  dynamic frontFemale,  String? frontShiny,  dynamic frontShinyFemale)  $default,) {final _that = this;
 switch (_that) {
 case _Home():
 return $default(_that.frontDefault,_that.frontFemale,_that.frontShiny,_that.frontShinyFemale);case _:
@@ -5200,7 +5250,7 @@ return $default(_that.frontDefault,_that.frontFemale,_that.frontShiny,_that.fron
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String frontDefault,  dynamic frontFemale,  String frontShiny,  dynamic frontShinyFemale)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? frontDefault,  dynamic frontFemale,  String? frontShiny,  dynamic frontShinyFemale)?  $default,) {final _that = this;
 switch (_that) {
 case _Home() when $default != null:
 return $default(_that.frontDefault,_that.frontFemale,_that.frontShiny,_that.frontShinyFemale);case _:
@@ -5218,9 +5268,9 @@ class _Home implements Home {
   const _Home({required this.frontDefault, required this.frontFemale, required this.frontShiny, required this.frontShinyFemale});
   factory _Home.fromJson(Map<String, dynamic> json) => _$HomeFromJson(json);
 
-@override final  String frontDefault;
+@override final  String? frontDefault;
 @override final  dynamic frontFemale;
-@override final  String frontShiny;
+@override final  String? frontShiny;
 @override final  dynamic frontShinyFemale;
 
 /// Create a copy of Home
@@ -5256,7 +5306,7 @@ abstract mixin class _$HomeCopyWith<$Res> implements $HomeCopyWith<$Res> {
   factory _$HomeCopyWith(_Home value, $Res Function(_Home) _then) = __$HomeCopyWithImpl;
 @override @useResult
 $Res call({
- String frontDefault, dynamic frontFemale, String frontShiny, dynamic frontShinyFemale
+ String? frontDefault, dynamic frontFemale, String? frontShiny, dynamic frontShinyFemale
 });
 
 
@@ -5273,12 +5323,12 @@ class __$HomeCopyWithImpl<$Res>
 
 /// Create a copy of Home
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? frontDefault = null,Object? frontFemale = freezed,Object? frontShiny = null,Object? frontShinyFemale = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? frontDefault = freezed,Object? frontFemale = freezed,Object? frontShiny = freezed,Object? frontShinyFemale = freezed,}) {
   return _then(_Home(
-frontDefault: null == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
-as String,frontFemale: freezed == frontFemale ? _self.frontFemale : frontFemale // ignore: cast_nullable_to_non_nullable
-as dynamic,frontShiny: null == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
-as String,frontShinyFemale: freezed == frontShinyFemale ? _self.frontShinyFemale : frontShinyFemale // ignore: cast_nullable_to_non_nullable
+frontDefault: freezed == frontDefault ? _self.frontDefault : frontDefault // ignore: cast_nullable_to_non_nullable
+as String?,frontFemale: freezed == frontFemale ? _self.frontFemale : frontFemale // ignore: cast_nullable_to_non_nullable
+as dynamic,frontShiny: freezed == frontShiny ? _self.frontShiny : frontShiny // ignore: cast_nullable_to_non_nullable
+as String?,frontShinyFemale: freezed == frontShinyFemale ? _self.frontShinyFemale : frontShinyFemale // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
 }
@@ -5290,7 +5340,7 @@ as dynamic,
 /// @nodoc
 mixin _$GenerationVii {
 
- DreamWorld get icons; Home get ultraSunUltraMoon;
+ DreamWorld? get icons; Home get ultraSunUltraMoon;
 /// Create a copy of GenerationVii
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5323,11 +5373,11 @@ abstract mixin class $GenerationViiCopyWith<$Res>  {
   factory $GenerationViiCopyWith(GenerationVii value, $Res Function(GenerationVii) _then) = _$GenerationViiCopyWithImpl;
 @useResult
 $Res call({
- DreamWorld icons, Home ultraSunUltraMoon
+ DreamWorld? icons, Home ultraSunUltraMoon
 });
 
 
-$DreamWorldCopyWith<$Res> get icons;$HomeCopyWith<$Res> get ultraSunUltraMoon;
+$DreamWorldCopyWith<$Res>? get icons;$HomeCopyWith<$Res> get ultraSunUltraMoon;
 
 }
 /// @nodoc
@@ -5340,10 +5390,10 @@ class _$GenerationViiCopyWithImpl<$Res>
 
 /// Create a copy of GenerationVii
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? icons = null,Object? ultraSunUltraMoon = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? icons = freezed,Object? ultraSunUltraMoon = null,}) {
   return _then(_self.copyWith(
-icons: null == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
-as DreamWorld,ultraSunUltraMoon: null == ultraSunUltraMoon ? _self.ultraSunUltraMoon : ultraSunUltraMoon // ignore: cast_nullable_to_non_nullable
+icons: freezed == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
+as DreamWorld?,ultraSunUltraMoon: null == ultraSunUltraMoon ? _self.ultraSunUltraMoon : ultraSunUltraMoon // ignore: cast_nullable_to_non_nullable
 as Home,
   ));
 }
@@ -5351,9 +5401,12 @@ as Home,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DreamWorldCopyWith<$Res> get icons {
-  
-  return $DreamWorldCopyWith<$Res>(_self.icons, (value) {
+$DreamWorldCopyWith<$Res>? get icons {
+    if (_self.icons == null) {
+    return null;
+  }
+
+  return $DreamWorldCopyWith<$Res>(_self.icons!, (value) {
     return _then(_self.copyWith(icons: value));
   });
 }/// Create a copy of GenerationVii
@@ -5447,7 +5500,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DreamWorld icons,  Home ultraSunUltraMoon)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DreamWorld? icons,  Home ultraSunUltraMoon)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GenerationVii() when $default != null:
 return $default(_that.icons,_that.ultraSunUltraMoon);case _:
@@ -5468,7 +5521,7 @@ return $default(_that.icons,_that.ultraSunUltraMoon);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DreamWorld icons,  Home ultraSunUltraMoon)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DreamWorld? icons,  Home ultraSunUltraMoon)  $default,) {final _that = this;
 switch (_that) {
 case _GenerationVii():
 return $default(_that.icons,_that.ultraSunUltraMoon);case _:
@@ -5488,7 +5541,7 @@ return $default(_that.icons,_that.ultraSunUltraMoon);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DreamWorld icons,  Home ultraSunUltraMoon)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DreamWorld? icons,  Home ultraSunUltraMoon)?  $default,) {final _that = this;
 switch (_that) {
 case _GenerationVii() when $default != null:
 return $default(_that.icons,_that.ultraSunUltraMoon);case _:
@@ -5506,7 +5559,7 @@ class _GenerationVii implements GenerationVii {
   const _GenerationVii({required this.icons, required this.ultraSunUltraMoon});
   factory _GenerationVii.fromJson(Map<String, dynamic> json) => _$GenerationViiFromJson(json);
 
-@override final  DreamWorld icons;
+@override final  DreamWorld? icons;
 @override final  Home ultraSunUltraMoon;
 
 /// Create a copy of GenerationVii
@@ -5542,11 +5595,11 @@ abstract mixin class _$GenerationViiCopyWith<$Res> implements $GenerationViiCopy
   factory _$GenerationViiCopyWith(_GenerationVii value, $Res Function(_GenerationVii) _then) = __$GenerationViiCopyWithImpl;
 @override @useResult
 $Res call({
- DreamWorld icons, Home ultraSunUltraMoon
+ DreamWorld? icons, Home ultraSunUltraMoon
 });
 
 
-@override $DreamWorldCopyWith<$Res> get icons;@override $HomeCopyWith<$Res> get ultraSunUltraMoon;
+@override $DreamWorldCopyWith<$Res>? get icons;@override $HomeCopyWith<$Res> get ultraSunUltraMoon;
 
 }
 /// @nodoc
@@ -5559,10 +5612,10 @@ class __$GenerationViiCopyWithImpl<$Res>
 
 /// Create a copy of GenerationVii
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? icons = null,Object? ultraSunUltraMoon = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? icons = freezed,Object? ultraSunUltraMoon = null,}) {
   return _then(_GenerationVii(
-icons: null == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
-as DreamWorld,ultraSunUltraMoon: null == ultraSunUltraMoon ? _self.ultraSunUltraMoon : ultraSunUltraMoon // ignore: cast_nullable_to_non_nullable
+icons: freezed == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
+as DreamWorld?,ultraSunUltraMoon: null == ultraSunUltraMoon ? _self.ultraSunUltraMoon : ultraSunUltraMoon // ignore: cast_nullable_to_non_nullable
 as Home,
   ));
 }
@@ -5571,9 +5624,12 @@ as Home,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DreamWorldCopyWith<$Res> get icons {
-  
-  return $DreamWorldCopyWith<$Res>(_self.icons, (value) {
+$DreamWorldCopyWith<$Res>? get icons {
+    if (_self.icons == null) {
+    return null;
+  }
+
+  return $DreamWorldCopyWith<$Res>(_self.icons!, (value) {
     return _then(_self.copyWith(icons: value));
   });
 }/// Create a copy of GenerationVii
@@ -5858,7 +5914,7 @@ as dynamic,
 /// @nodoc
 mixin _$GenerationViii {
 
- DreamWorld get icons;
+ DreamWorld? get icons;
 /// Create a copy of GenerationViii
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -5891,11 +5947,11 @@ abstract mixin class $GenerationViiiCopyWith<$Res>  {
   factory $GenerationViiiCopyWith(GenerationViii value, $Res Function(GenerationViii) _then) = _$GenerationViiiCopyWithImpl;
 @useResult
 $Res call({
- DreamWorld icons
+ DreamWorld? icons
 });
 
 
-$DreamWorldCopyWith<$Res> get icons;
+$DreamWorldCopyWith<$Res>? get icons;
 
 }
 /// @nodoc
@@ -5908,19 +5964,22 @@ class _$GenerationViiiCopyWithImpl<$Res>
 
 /// Create a copy of GenerationViii
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? icons = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? icons = freezed,}) {
   return _then(_self.copyWith(
-icons: null == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
-as DreamWorld,
+icons: freezed == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
+as DreamWorld?,
   ));
 }
 /// Create a copy of GenerationViii
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DreamWorldCopyWith<$Res> get icons {
-  
-  return $DreamWorldCopyWith<$Res>(_self.icons, (value) {
+$DreamWorldCopyWith<$Res>? get icons {
+    if (_self.icons == null) {
+    return null;
+  }
+
+  return $DreamWorldCopyWith<$Res>(_self.icons!, (value) {
     return _then(_self.copyWith(icons: value));
   });
 }
@@ -6005,7 +6064,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DreamWorld icons)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DreamWorld? icons)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GenerationViii() when $default != null:
 return $default(_that.icons);case _:
@@ -6026,7 +6085,7 @@ return $default(_that.icons);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DreamWorld icons)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DreamWorld? icons)  $default,) {final _that = this;
 switch (_that) {
 case _GenerationViii():
 return $default(_that.icons);case _:
@@ -6046,7 +6105,7 @@ return $default(_that.icons);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DreamWorld icons)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DreamWorld? icons)?  $default,) {final _that = this;
 switch (_that) {
 case _GenerationViii() when $default != null:
 return $default(_that.icons);case _:
@@ -6064,7 +6123,7 @@ class _GenerationViii implements GenerationViii {
   const _GenerationViii({required this.icons});
   factory _GenerationViii.fromJson(Map<String, dynamic> json) => _$GenerationViiiFromJson(json);
 
-@override final  DreamWorld icons;
+@override final  DreamWorld? icons;
 
 /// Create a copy of GenerationViii
 /// with the given fields replaced by the non-null parameter values.
@@ -6099,11 +6158,11 @@ abstract mixin class _$GenerationViiiCopyWith<$Res> implements $GenerationViiiCo
   factory _$GenerationViiiCopyWith(_GenerationViii value, $Res Function(_GenerationViii) _then) = __$GenerationViiiCopyWithImpl;
 @override @useResult
 $Res call({
- DreamWorld icons
+ DreamWorld? icons
 });
 
 
-@override $DreamWorldCopyWith<$Res> get icons;
+@override $DreamWorldCopyWith<$Res>? get icons;
 
 }
 /// @nodoc
@@ -6116,10 +6175,10 @@ class __$GenerationViiiCopyWithImpl<$Res>
 
 /// Create a copy of GenerationViii
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? icons = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? icons = freezed,}) {
   return _then(_GenerationViii(
-icons: null == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
-as DreamWorld,
+icons: freezed == icons ? _self.icons : icons // ignore: cast_nullable_to_non_nullable
+as DreamWorld?,
   ));
 }
 
@@ -6127,9 +6186,12 @@ as DreamWorld,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DreamWorldCopyWith<$Res> get icons {
-  
-  return $DreamWorldCopyWith<$Res>(_self.icons, (value) {
+$DreamWorldCopyWith<$Res>? get icons {
+    if (_self.icons == null) {
+    return null;
+  }
+
+  return $DreamWorldCopyWith<$Res>(_self.icons!, (value) {
     return _then(_self.copyWith(icons: value));
   });
 }
@@ -6139,7 +6201,7 @@ $DreamWorldCopyWith<$Res> get icons {
 /// @nodoc
 mixin _$Other {
 
- DreamWorld get dreamWorld; Home get home; OfficialArtwork get officialArtwork;
+ DreamWorld? get dreamWorld; Home? get home; OfficialArtwork? get officialArtwork;
 /// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -6172,11 +6234,11 @@ abstract mixin class $OtherCopyWith<$Res>  {
   factory $OtherCopyWith(Other value, $Res Function(Other) _then) = _$OtherCopyWithImpl;
 @useResult
 $Res call({
- DreamWorld dreamWorld, Home home, OfficialArtwork officialArtwork
+ DreamWorld? dreamWorld, Home? home, OfficialArtwork? officialArtwork
 });
 
 
-$DreamWorldCopyWith<$Res> get dreamWorld;$HomeCopyWith<$Res> get home;$OfficialArtworkCopyWith<$Res> get officialArtwork;
+$DreamWorldCopyWith<$Res>? get dreamWorld;$HomeCopyWith<$Res>? get home;$OfficialArtworkCopyWith<$Res>? get officialArtwork;
 
 }
 /// @nodoc
@@ -6189,39 +6251,48 @@ class _$OtherCopyWithImpl<$Res>
 
 /// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dreamWorld = null,Object? home = null,Object? officialArtwork = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dreamWorld = freezed,Object? home = freezed,Object? officialArtwork = freezed,}) {
   return _then(_self.copyWith(
-dreamWorld: null == dreamWorld ? _self.dreamWorld : dreamWorld // ignore: cast_nullable_to_non_nullable
-as DreamWorld,home: null == home ? _self.home : home // ignore: cast_nullable_to_non_nullable
-as Home,officialArtwork: null == officialArtwork ? _self.officialArtwork : officialArtwork // ignore: cast_nullable_to_non_nullable
-as OfficialArtwork,
+dreamWorld: freezed == dreamWorld ? _self.dreamWorld : dreamWorld // ignore: cast_nullable_to_non_nullable
+as DreamWorld?,home: freezed == home ? _self.home : home // ignore: cast_nullable_to_non_nullable
+as Home?,officialArtwork: freezed == officialArtwork ? _self.officialArtwork : officialArtwork // ignore: cast_nullable_to_non_nullable
+as OfficialArtwork?,
   ));
 }
 /// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DreamWorldCopyWith<$Res> get dreamWorld {
-  
-  return $DreamWorldCopyWith<$Res>(_self.dreamWorld, (value) {
+$DreamWorldCopyWith<$Res>? get dreamWorld {
+    if (_self.dreamWorld == null) {
+    return null;
+  }
+
+  return $DreamWorldCopyWith<$Res>(_self.dreamWorld!, (value) {
     return _then(_self.copyWith(dreamWorld: value));
   });
 }/// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$HomeCopyWith<$Res> get home {
-  
-  return $HomeCopyWith<$Res>(_self.home, (value) {
+$HomeCopyWith<$Res>? get home {
+    if (_self.home == null) {
+    return null;
+  }
+
+  return $HomeCopyWith<$Res>(_self.home!, (value) {
     return _then(_self.copyWith(home: value));
   });
 }/// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$OfficialArtworkCopyWith<$Res> get officialArtwork {
-  
-  return $OfficialArtworkCopyWith<$Res>(_self.officialArtwork, (value) {
+$OfficialArtworkCopyWith<$Res>? get officialArtwork {
+    if (_self.officialArtwork == null) {
+    return null;
+  }
+
+  return $OfficialArtworkCopyWith<$Res>(_self.officialArtwork!, (value) {
     return _then(_self.copyWith(officialArtwork: value));
   });
 }
@@ -6306,7 +6377,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DreamWorld dreamWorld,  Home home,  OfficialArtwork officialArtwork)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DreamWorld? dreamWorld,  Home? home,  OfficialArtwork? officialArtwork)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Other() when $default != null:
 return $default(_that.dreamWorld,_that.home,_that.officialArtwork);case _:
@@ -6327,7 +6398,7 @@ return $default(_that.dreamWorld,_that.home,_that.officialArtwork);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DreamWorld dreamWorld,  Home home,  OfficialArtwork officialArtwork)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DreamWorld? dreamWorld,  Home? home,  OfficialArtwork? officialArtwork)  $default,) {final _that = this;
 switch (_that) {
 case _Other():
 return $default(_that.dreamWorld,_that.home,_that.officialArtwork);case _:
@@ -6347,7 +6418,7 @@ return $default(_that.dreamWorld,_that.home,_that.officialArtwork);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DreamWorld dreamWorld,  Home home,  OfficialArtwork officialArtwork)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DreamWorld? dreamWorld,  Home? home,  OfficialArtwork? officialArtwork)?  $default,) {final _that = this;
 switch (_that) {
 case _Other() when $default != null:
 return $default(_that.dreamWorld,_that.home,_that.officialArtwork);case _:
@@ -6362,12 +6433,12 @@ return $default(_that.dreamWorld,_that.home,_that.officialArtwork);case _:
 @JsonSerializable()
 
 class _Other implements Other {
-  const _Other({required this.dreamWorld, required this.home, required this.officialArtwork});
+  const _Other({this.dreamWorld, this.home, this.officialArtwork});
   factory _Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
 
-@override final  DreamWorld dreamWorld;
-@override final  Home home;
-@override final  OfficialArtwork officialArtwork;
+@override final  DreamWorld? dreamWorld;
+@override final  Home? home;
+@override final  OfficialArtwork? officialArtwork;
 
 /// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
@@ -6402,11 +6473,11 @@ abstract mixin class _$OtherCopyWith<$Res> implements $OtherCopyWith<$Res> {
   factory _$OtherCopyWith(_Other value, $Res Function(_Other) _then) = __$OtherCopyWithImpl;
 @override @useResult
 $Res call({
- DreamWorld dreamWorld, Home home, OfficialArtwork officialArtwork
+ DreamWorld? dreamWorld, Home? home, OfficialArtwork? officialArtwork
 });
 
 
-@override $DreamWorldCopyWith<$Res> get dreamWorld;@override $HomeCopyWith<$Res> get home;@override $OfficialArtworkCopyWith<$Res> get officialArtwork;
+@override $DreamWorldCopyWith<$Res>? get dreamWorld;@override $HomeCopyWith<$Res>? get home;@override $OfficialArtworkCopyWith<$Res>? get officialArtwork;
 
 }
 /// @nodoc
@@ -6419,12 +6490,12 @@ class __$OtherCopyWithImpl<$Res>
 
 /// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dreamWorld = null,Object? home = null,Object? officialArtwork = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dreamWorld = freezed,Object? home = freezed,Object? officialArtwork = freezed,}) {
   return _then(_Other(
-dreamWorld: null == dreamWorld ? _self.dreamWorld : dreamWorld // ignore: cast_nullable_to_non_nullable
-as DreamWorld,home: null == home ? _self.home : home // ignore: cast_nullable_to_non_nullable
-as Home,officialArtwork: null == officialArtwork ? _self.officialArtwork : officialArtwork // ignore: cast_nullable_to_non_nullable
-as OfficialArtwork,
+dreamWorld: freezed == dreamWorld ? _self.dreamWorld : dreamWorld // ignore: cast_nullable_to_non_nullable
+as DreamWorld?,home: freezed == home ? _self.home : home // ignore: cast_nullable_to_non_nullable
+as Home?,officialArtwork: freezed == officialArtwork ? _self.officialArtwork : officialArtwork // ignore: cast_nullable_to_non_nullable
+as OfficialArtwork?,
   ));
 }
 
@@ -6432,27 +6503,36 @@ as OfficialArtwork,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DreamWorldCopyWith<$Res> get dreamWorld {
-  
-  return $DreamWorldCopyWith<$Res>(_self.dreamWorld, (value) {
+$DreamWorldCopyWith<$Res>? get dreamWorld {
+    if (_self.dreamWorld == null) {
+    return null;
+  }
+
+  return $DreamWorldCopyWith<$Res>(_self.dreamWorld!, (value) {
     return _then(_self.copyWith(dreamWorld: value));
   });
 }/// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$HomeCopyWith<$Res> get home {
-  
-  return $HomeCopyWith<$Res>(_self.home, (value) {
+$HomeCopyWith<$Res>? get home {
+    if (_self.home == null) {
+    return null;
+  }
+
+  return $HomeCopyWith<$Res>(_self.home!, (value) {
     return _then(_self.copyWith(home: value));
   });
 }/// Create a copy of Other
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$OfficialArtworkCopyWith<$Res> get officialArtwork {
-  
-  return $OfficialArtworkCopyWith<$Res>(_self.officialArtwork, (value) {
+$OfficialArtworkCopyWith<$Res>? get officialArtwork {
+    if (_self.officialArtwork == null) {
+    return null;
+  }
+
+  return $OfficialArtworkCopyWith<$Res>(_self.officialArtwork!, (value) {
     return _then(_self.copyWith(officialArtwork: value));
   });
 }

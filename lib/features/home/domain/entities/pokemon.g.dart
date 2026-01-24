@@ -14,16 +14,16 @@ _Pokemon _$PokemonFromJson(Map<String, dynamic> json) => _Pokemon(
   forms: (json['forms'] as List<dynamic>)
       .map((e) => Species.fromJson(e as Map<String, dynamic>))
       .toList(),
-  gameIndices: (json['gameIndices'] as List<dynamic>)
-      .map((e) => GameIndex.fromJson(e as Map<String, dynamic>))
+  gameIndices: (json['gameIndices'] as List<dynamic>?)
+      ?.map((e) => GameIndex.fromJson(e as Map<String, dynamic>))
       .toList(),
   height: (json['height'] as num).toInt(),
-  heldItems: (json['heldItems'] as List<dynamic>)
-      .map((e) => HeldItem.fromJson(e as Map<String, dynamic>))
+  heldItems: (json['heldItems'] as List<dynamic>?)
+      ?.map((e) => HeldItem.fromJson(e as Map<String, dynamic>))
       .toList(),
   id: (json['id'] as num).toInt(),
-  isDefault: json['isDefault'] as bool,
-  locationAreaEncounters: json['locationAreaEncounters'] as String,
+  isDefault: json['isDefault'] as bool?,
+  locationAreaEncounters: json['locationAreaEncounters'] as String?,
   moves: (json['moves'] as List<dynamic>)
       .map((e) => Move.fromJson(e as Map<String, dynamic>))
       .toList(),
@@ -85,8 +85,8 @@ Map<String, dynamic> _$VersionDetailToJson(_VersionDetail instance) =>
 
 _Move _$MoveFromJson(Map<String, dynamic> json) => _Move(
   move: Species.fromJson(json['move'] as Map<String, dynamic>),
-  versionGroupDetails: (json['versionGroupDetails'] as List<dynamic>)
-      .map((e) => VersionGroupDetail.fromJson(e as Map<String, dynamic>))
+  versionGroupDetails: (json['versionGroupDetails'] as List<dynamic>?)
+      ?.map((e) => VersionGroupDetail.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 
@@ -139,30 +139,30 @@ Map<String, dynamic> _$GenerationIvToJson(_GenerationIv instance) =>
     };
 
 _Versions _$VersionsFromJson(Map<String, dynamic> json) => _Versions(
-  generationI: GenerationI.fromJson(
-    json['generationI'] as Map<String, dynamic>,
-  ),
-  generationIi: GenerationIi.fromJson(
-    json['generationIi'] as Map<String, dynamic>,
-  ),
-  generationIii: GenerationIii.fromJson(
-    json['generationIii'] as Map<String, dynamic>,
-  ),
-  generationIv: GenerationIv.fromJson(
-    json['generationIv'] as Map<String, dynamic>,
-  ),
-  generationV: GenerationV.fromJson(
-    json['generationV'] as Map<String, dynamic>,
-  ),
-  generationVi: (json['generationVi'] as Map<String, dynamic>).map(
+  generationI: json['generationI'] == null
+      ? null
+      : GenerationI.fromJson(json['generationI'] as Map<String, dynamic>),
+  generationIi: json['generationIi'] == null
+      ? null
+      : GenerationIi.fromJson(json['generationIi'] as Map<String, dynamic>),
+  generationIii: json['generationIii'] == null
+      ? null
+      : GenerationIii.fromJson(json['generationIii'] as Map<String, dynamic>),
+  generationIv: json['generationIv'] == null
+      ? null
+      : GenerationIv.fromJson(json['generationIv'] as Map<String, dynamic>),
+  generationV: json['generationV'] == null
+      ? null
+      : GenerationV.fromJson(json['generationV'] as Map<String, dynamic>),
+  generationVi: (json['generationVi'] as Map<String, dynamic>?)?.map(
     (k, e) => MapEntry(k, Home.fromJson(e as Map<String, dynamic>)),
   ),
-  generationVii: GenerationVii.fromJson(
-    json['generationVii'] as Map<String, dynamic>,
-  ),
-  generationViii: GenerationViii.fromJson(
-    json['generationViii'] as Map<String, dynamic>,
-  ),
+  generationVii: json['generationVii'] == null
+      ? null
+      : GenerationVii.fromJson(json['generationVii'] as Map<String, dynamic>),
+  generationViii: json['generationViii'] == null
+      ? null
+      : GenerationViii.fromJson(json['generationViii'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$VersionsToJson(_Versions instance) => <String, dynamic>{
@@ -305,7 +305,7 @@ Map<String, dynamic> _$GenerationIiiToJson(_GenerationIii instance) =>
     };
 
 _Emerald _$EmeraldFromJson(Map<String, dynamic> json) => _Emerald(
-  frontDefault: json['frontDefault'] as String,
+  frontDefault: json['frontDefault'] as String?,
   frontShiny: json['frontShiny'] as String,
 );
 
@@ -315,9 +315,9 @@ Map<String, dynamic> _$EmeraldToJson(_Emerald instance) => <String, dynamic>{
 };
 
 _Home _$HomeFromJson(Map<String, dynamic> json) => _Home(
-  frontDefault: json['frontDefault'] as String,
+  frontDefault: json['frontDefault'] as String?,
   frontFemale: json['frontFemale'],
-  frontShiny: json['frontShiny'] as String,
+  frontShiny: json['frontShiny'] as String?,
   frontShinyFemale: json['frontShinyFemale'],
 );
 
@@ -330,7 +330,9 @@ Map<String, dynamic> _$HomeToJson(_Home instance) => <String, dynamic>{
 
 _GenerationVii _$GenerationViiFromJson(Map<String, dynamic> json) =>
     _GenerationVii(
-      icons: DreamWorld.fromJson(json['icons'] as Map<String, dynamic>),
+      icons: json['icons'] == null
+          ? null
+          : DreamWorld.fromJson(json['icons'] as Map<String, dynamic>),
       ultraSunUltraMoon: Home.fromJson(
         json['ultraSunUltraMoon'] as Map<String, dynamic>,
       ),
@@ -355,18 +357,26 @@ Map<String, dynamic> _$DreamWorldToJson(_DreamWorld instance) =>
 
 _GenerationViii _$GenerationViiiFromJson(Map<String, dynamic> json) =>
     _GenerationViii(
-      icons: DreamWorld.fromJson(json['icons'] as Map<String, dynamic>),
+      icons: json['icons'] == null
+          ? null
+          : DreamWorld.fromJson(json['icons'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GenerationViiiToJson(_GenerationViii instance) =>
     <String, dynamic>{'icons': instance.icons};
 
 _Other _$OtherFromJson(Map<String, dynamic> json) => _Other(
-  dreamWorld: DreamWorld.fromJson(json['dreamWorld'] as Map<String, dynamic>),
-  home: Home.fromJson(json['home'] as Map<String, dynamic>),
-  officialArtwork: OfficialArtwork.fromJson(
-    json['officialArtwork'] as Map<String, dynamic>,
-  ),
+  dreamWorld: json['dreamWorld'] == null
+      ? null
+      : DreamWorld.fromJson(json['dreamWorld'] as Map<String, dynamic>),
+  home: json['home'] == null
+      ? null
+      : Home.fromJson(json['home'] as Map<String, dynamic>),
+  officialArtwork: json['officialArtwork'] == null
+      ? null
+      : OfficialArtwork.fromJson(
+          json['officialArtwork'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$OtherToJson(_Other instance) => <String, dynamic>{

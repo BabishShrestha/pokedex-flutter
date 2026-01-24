@@ -20,12 +20,12 @@ abstract class Pokemon with _$Pokemon {
     required List<Ability> abilities,
     int? baseExperience,
     required List<Species> forms,
-    required List<GameIndex> gameIndices,
+    required List<GameIndex>? gameIndices,
     required int height,
-    required List<HeldItem> heldItems,
+    required List<HeldItem>? heldItems,
     required int id,
-    required bool isDefault,
-    required String locationAreaEncounters,
+    required bool? isDefault,
+    required String? locationAreaEncounters,
     required List<Move> moves,
     required String name,
     required int order,
@@ -65,7 +65,7 @@ abstract class VersionDetail with _$VersionDetail {
 abstract class Move with _$Move {
   const factory Move({
     required Species move,
-    required List<VersionGroupDetail> versionGroupDetails,
+    required List<VersionGroupDetail>? versionGroupDetails,
   }) = _Move;
 
   factory Move.fromJson(Map<String, dynamic> json) => _$MoveFromJson(json);
@@ -106,14 +106,14 @@ abstract class GenerationIv with _$GenerationIv {
 @freezed
 abstract class Versions with _$Versions {
   const factory Versions({
-    required GenerationI generationI,
-    required GenerationIi generationIi,
-    required GenerationIii generationIii,
-    required GenerationIv generationIv,
-    required GenerationV generationV,
-    required Map<String, Home> generationVi,
-    required GenerationVii generationVii,
-    required GenerationViii generationViii,
+    GenerationI? generationI,
+    GenerationIi? generationIi,
+    GenerationIii? generationIii,
+    GenerationIv? generationIv,
+    GenerationV? generationV,
+    Map<String, Home>? generationVi,
+    GenerationVii? generationVii,
+    GenerationViii? generationViii,
   }) = _Versions;
 
   factory Versions.fromJson(Map<String, dynamic> json) =>
@@ -223,7 +223,7 @@ abstract class GenerationIii with _$GenerationIii {
 @freezed
 abstract class Emerald with _$Emerald {
   const factory Emerald({
-    required String frontDefault,
+    required String? frontDefault,
     required String frontShiny,
   }) = _Emerald;
 
@@ -234,9 +234,9 @@ abstract class Emerald with _$Emerald {
 @freezed
 abstract class Home with _$Home {
   const factory Home({
-    required String frontDefault,
+    required String? frontDefault,
     required dynamic frontFemale,
-    required String frontShiny,
+    required String? frontShiny,
     required dynamic frontShinyFemale,
   }) = _Home;
 
@@ -246,7 +246,7 @@ abstract class Home with _$Home {
 @freezed
 abstract class GenerationVii with _$GenerationVii {
   const factory GenerationVii({
-    required DreamWorld icons,
+    required DreamWorld? icons,
     required Home ultraSunUltraMoon,
   }) = _GenerationVii;
 
@@ -267,7 +267,7 @@ abstract class DreamWorld with _$DreamWorld {
 
 @freezed
 abstract class GenerationViii with _$GenerationViii {
-  const factory GenerationViii({required DreamWorld icons}) = _GenerationViii;
+  const factory GenerationViii({required DreamWorld? icons}) = _GenerationViii;
 
   factory GenerationViii.fromJson(Map<String, dynamic> json) =>
       _$GenerationViiiFromJson(json);
@@ -276,9 +276,9 @@ abstract class GenerationViii with _$GenerationViii {
 @freezed
 abstract class Other with _$Other {
   const factory Other({
-    required DreamWorld dreamWorld,
-    required Home home,
-    required OfficialArtwork officialArtwork,
+    DreamWorld? dreamWorld,
+    Home? home,
+    OfficialArtwork? officialArtwork,
   }) = _Other;
 
   factory Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
