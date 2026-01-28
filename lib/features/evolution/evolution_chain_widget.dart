@@ -8,10 +8,7 @@ import 'package:pokedex/features/evolution/evolution_chain_provider.dart';
 class EvolutionChainWidget extends ConsumerWidget {
   final int pokemonId;
 
-  const EvolutionChainWidget({
-    required this.pokemonId,
-    super.key,
-  });
+  const EvolutionChainWidget({required this.pokemonId, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -80,7 +77,7 @@ class EvolutionChainWidget extends ConsumerWidget {
       children: [
         // Current Pokemon
         _buildPokemonCard(member),
-        
+
         // Evolutions
         if (member.evolvesTo.isNotEmpty) ...[
           for (var evoTrigger in member.evolvesTo) ...[
@@ -89,11 +86,7 @@ class EvolutionChainWidget extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
-                  const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.grey,
-                    size: 24,
-                  ),
+                  const Icon(Icons.arrow_forward, color: Colors.grey, size: 24),
                   if (evoTrigger.minLevel != null ||
                       evoTrigger.item != null ||
                       evoTrigger.condition != null)
@@ -145,9 +138,8 @@ class EvolutionChainWidget extends ConsumerWidget {
             child: CachedNetworkImage(
               imageUrl: member.imageUrl,
               fit: BoxFit.contain,
-              placeholder: (context, url) => const Center(
-                child: PokemonLoaderSmall(size: 30),
-              ),
+              placeholder: (context, url) =>
+                  const Center(child: PokemonLoaderSmall(size: 30)),
               errorWidget: (context, url, error) => Icon(
                 Icons.catching_pokemon,
                 size: 40,
