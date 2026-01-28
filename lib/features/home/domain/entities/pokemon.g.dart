@@ -392,7 +392,7 @@ Map<String, dynamic> _$OfficialArtworkToJson(_OfficialArtwork instance) =>
     <String, dynamic>{'frontDefault': instance.frontDefault};
 
 _Stat _$StatFromJson(Map<String, dynamic> json) => _Stat(
-  baseStat: (json['baseStat'] as num).toInt(),
+  baseStat: (json['baseStat'] as num?)?.toInt(),
   effort: (json['effort'] as num).toInt(),
   stat: Species.fromJson(json['stat'] as Map<String, dynamic>),
 );

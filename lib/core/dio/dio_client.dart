@@ -9,7 +9,7 @@ final dioProvider = Provider<Dio>((ref) {
     contentType: Headers.jsonContentType,
     headers: <String, dynamic>{'Accept': Headers.jsonContentType},
 
-    validateStatus: (status) => status != null && status == 200 && status < 400,
+    validateStatus: (status) => status != null && status >= 200 && status < 400,
     connectTimeout: Duration(seconds: 30), //30 sec
     receiveTimeout: Duration(seconds: 30), //30 sec
   );

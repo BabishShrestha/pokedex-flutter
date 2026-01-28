@@ -6805,7 +6805,7 @@ as String?,
 /// @nodoc
 mixin _$Stat {
 
- int get baseStat; int get effort; Species get stat;
+ int? get baseStat; int get effort; Species get stat;
 /// Create a copy of Stat
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -6838,7 +6838,7 @@ abstract mixin class $StatCopyWith<$Res>  {
   factory $StatCopyWith(Stat value, $Res Function(Stat) _then) = _$StatCopyWithImpl;
 @useResult
 $Res call({
- int baseStat, int effort, Species stat
+ int? baseStat, int effort, Species stat
 });
 
 
@@ -6855,10 +6855,10 @@ class _$StatCopyWithImpl<$Res>
 
 /// Create a copy of Stat
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? baseStat = null,Object? effort = null,Object? stat = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? baseStat = freezed,Object? effort = null,Object? stat = null,}) {
   return _then(_self.copyWith(
-baseStat: null == baseStat ? _self.baseStat : baseStat // ignore: cast_nullable_to_non_nullable
-as int,effort: null == effort ? _self.effort : effort // ignore: cast_nullable_to_non_nullable
+baseStat: freezed == baseStat ? _self.baseStat : baseStat // ignore: cast_nullable_to_non_nullable
+as int?,effort: null == effort ? _self.effort : effort // ignore: cast_nullable_to_non_nullable
 as int,stat: null == stat ? _self.stat : stat // ignore: cast_nullable_to_non_nullable
 as Species,
   ));
@@ -6954,7 +6954,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int baseStat,  int effort,  Species stat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? baseStat,  int effort,  Species stat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Stat() when $default != null:
 return $default(_that.baseStat,_that.effort,_that.stat);case _:
@@ -6975,7 +6975,7 @@ return $default(_that.baseStat,_that.effort,_that.stat);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int baseStat,  int effort,  Species stat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? baseStat,  int effort,  Species stat)  $default,) {final _that = this;
 switch (_that) {
 case _Stat():
 return $default(_that.baseStat,_that.effort,_that.stat);case _:
@@ -6995,7 +6995,7 @@ return $default(_that.baseStat,_that.effort,_that.stat);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int baseStat,  int effort,  Species stat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? baseStat,  int effort,  Species stat)?  $default,) {final _that = this;
 switch (_that) {
 case _Stat() when $default != null:
 return $default(_that.baseStat,_that.effort,_that.stat);case _:
@@ -7013,7 +7013,7 @@ class _Stat implements Stat {
   const _Stat({required this.baseStat, required this.effort, required this.stat});
   factory _Stat.fromJson(Map<String, dynamic> json) => _$StatFromJson(json);
 
-@override final  int baseStat;
+@override final  int? baseStat;
 @override final  int effort;
 @override final  Species stat;
 
@@ -7050,7 +7050,7 @@ abstract mixin class _$StatCopyWith<$Res> implements $StatCopyWith<$Res> {
   factory _$StatCopyWith(_Stat value, $Res Function(_Stat) _then) = __$StatCopyWithImpl;
 @override @useResult
 $Res call({
- int baseStat, int effort, Species stat
+ int? baseStat, int effort, Species stat
 });
 
 
@@ -7067,10 +7067,10 @@ class __$StatCopyWithImpl<$Res>
 
 /// Create a copy of Stat
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? baseStat = null,Object? effort = null,Object? stat = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? baseStat = freezed,Object? effort = null,Object? stat = null,}) {
   return _then(_Stat(
-baseStat: null == baseStat ? _self.baseStat : baseStat // ignore: cast_nullable_to_non_nullable
-as int,effort: null == effort ? _self.effort : effort // ignore: cast_nullable_to_non_nullable
+baseStat: freezed == baseStat ? _self.baseStat : baseStat // ignore: cast_nullable_to_non_nullable
+as int?,effort: null == effort ? _self.effort : effort // ignore: cast_nullable_to_non_nullable
 as int,stat: null == stat ? _self.stat : stat // ignore: cast_nullable_to_non_nullable
 as Species,
   ));
