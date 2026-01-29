@@ -14,6 +14,7 @@ class CacheRepository {
   static const String _generationBox = 'generation_cache';
   static const String _typeBox = 'type_cache';
   static const String _settingsBox = 'settings';
+  static const String _favouritesBox = 'favourites';
 
   // Cache expiration: 7 days
   static const Duration _cacheExpiration = Duration(days: 7);
@@ -355,6 +356,26 @@ class CacheRepository {
     }
   }
 
+  /// Get favourite Pokemon IDs
+  Future<Set<int>> getFavouritePokemonIds() async {
+    try {
+      final box = await Hive.openBox<int>(_favouritesBox);
+      return box.values.toSet();
+    } catch (e) {
+      return {};
+    }
+  }
+
+  /// Add favourite Pokemon ID
+  Future<void> addFavouritePokemonId(int id) async {
+    try {
+      final box = await Hive.openBox<int>(_favouritesBox);
+      await box.put(id, id);
+    } catch (e) {
+      // Silently fail
+    }
+  }
+
   /// Get approximate cache size in bytes
   Future<Map<String, int>> getCacheSizes() async {
     final sizes = <String, int>{};
@@ -391,6 +412,30 @@ class CacheRepository {
       return detailBox.length;
     } catch (e) {
       return 0;
+    }
+  }
+
+  /// Get favorites from cache
+  Future<Set<int>> getFavorites() async {
+    try {
+      final box = await Hive.openBox<List>(_favouritesBox);
+      final favoritesList = box.get('favorites');
+      if (favoritesList != null) {
+        return Set<int>.from(favoritesList.cast<int>());
+      }
+      return {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  /// Save favorites to cache
+  Future<void> saveFavorites(Set<int> favorites) async {
+    try {
+      final box = await Hive.openBox<List>(_favouritesBox);
+      await box.put('favorites', favorites.toList());
+    } catch (e) {
+      // Silently fail
     }
   }
 

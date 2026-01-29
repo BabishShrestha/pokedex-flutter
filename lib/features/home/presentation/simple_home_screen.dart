@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/core/services/connectivity_service.dart';
 import 'package:pokedex/core/services/sound_service.dart';
+import 'package:pokedex/core/widgets/favorite_dialog.dart';
 import 'package:pokedex/core/widgets/pokemon_loader.dart';
+import 'package:pokedex/features/home/data/favorites_provider.dart';
 import 'package:pokedex/features/home/data/simple_pokemon_provider.dart';
+import 'package:pokedex/features/home/presentation/favourites_screen.dart';
 import 'package:pokedex/features/home/presentation/widgets/filter_bottom_sheet.dart';
 import 'package:pokedex/features/home/presentation/widgets/generation_filter_chips.dart';
 import 'package:pokedex/features/home/presentation/widgets/type_filter_chips.dart';
@@ -27,6 +30,7 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
   Timer? _debounceTimer;
   Timer? _prefetchTimer;
   final Set<int> _prefetchedIds = {};
+  bool _isFabExpanded = false;
 
   @override
   void initState() {
@@ -119,6 +123,7 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
     final displayPokemon = pokemonState.pokemon;
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: _buildExpandableFab(),
       appBar: AppBar(
         backgroundColor: const Color(0xFFDC0A2D),
         elevation: 0,
@@ -151,20 +156,6 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-            const Spacer(),
-            // Settings button
-            GestureDetector(
-              onTap: () {
-                soundService.playSound(SoundEffect.click);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsScreen(),
-                  ),
-                );
-              },
-              child: const Icon(Icons.settings, color: Colors.white),
             ),
           ],
         ),
@@ -386,6 +377,14 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
                           final pokemon = displayPokemon[index];
 
                           return GestureDetector(
+                            onLongPress: () {
+                              showFavoriteDialog(
+                                context: context,
+                                ref: ref,
+                                pokemonId: pokemon.id,
+                                pokemonName: pokemon.name,
+                              );
+                            },
                             onTap: () async {
                               // Play sound asynchronously without awaiting
                               soundService.playSound(SoundEffect.click);
@@ -438,85 +437,129 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
                                 }
                               }
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.08),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 2),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.08),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                children: [
-                                  // ID Number
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        '#${pokemon.id.toString().padLeft(3, '0')}',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.grey[600],
-                                          fontWeight: FontWeight.w600,
+                                  child: Column(
+                                    children: [
+                                      // ID Number
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            '#${pokemon.id.toString().padLeft(3, '0')}',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.grey[600],
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  // Pokemon Image
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                      ),
-                                      child: Hero(
-                                        tag: 'pokemon-${pokemon.id}',
-                                        child: CachedNetworkImage(
-                                          imageUrl: pokemon.imageUrl,
-                                          fit: BoxFit.contain,
-                                          placeholder: (context, url) =>
-                                              const Center(
-                                                child: PokemonLoaderSmall(
-                                                  size: 35,
-                                                ),
-                                              ),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(
-                                                Icons.catching_pokemon,
-                                                size: 40,
-                                                color: Colors.grey[300],
-                                              ),
+                                      // Pokemon Image
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                          ),
+                                          child: Hero(
+                                            tag: 'pokemon-${pokemon.id}',
+                                            child: CachedNetworkImage(
+                                              imageUrl: pokemon.imageUrl,
+                                              fit: BoxFit.contain,
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                    child: PokemonLoaderSmall(
+                                                      size: 35,
+                                                    ),
+                                                  ),
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                    Icons.catching_pokemon,
+                                                    size: 40,
+                                                    color: Colors.grey[300],
+                                                  ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  // Pokemon Name
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                      8,
-                                      0,
-                                      8,
-                                      12,
-                                    ),
-                                    child: Text(
-                                      pokemon.name[0].toUpperCase() +
-                                          pokemon.name.substring(1),
-                                      style: const TextStyle(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black87,
+                                      // Pokemon Name
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          8,
+                                          0,
+                                          8,
+                                          12,
+                                        ),
+                                        child: Text(
+                                          pokemon.name[0].toUpperCase() +
+                                              pokemon.name.substring(1),
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black87,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                // Favorite indicator
+                                Consumer(
+                                  builder: (context, ref, child) {
+                                    final isFavorite = ref.watch(
+                                      favoritesProvider.select(
+                                        (favorites) =>
+                                            favorites.contains(pokemon.id),
+                                      ),
+                                    );
+
+                                    if (!isFavorite)
+                                      return const SizedBox.shrink();
+
+                                    return Positioned(
+                                      top: 6,
+                                      left: 6,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFDC0A2D),
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withOpacity(
+                                                0.2,
+                                              ),
+                                              blurRadius: 4,
+                                              offset: const Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: const Icon(
+                                          Icons.favorite,
+                                          color: Colors.white,
+                                          size: 12,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                           );
                         }, childCount: displayPokemon.length),
@@ -535,6 +578,74 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildExpandableFab() {
+    final soundService = ref.watch(soundServiceProvider);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        // Favorites button (shown when expanded)
+        if (_isFabExpanded) ...[
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: FloatingActionButton(
+              heroTag: 'favorites',
+              backgroundColor: const Color(0xFFDC0A2D),
+              onPressed: () {
+                soundService.playSound(SoundEffect.click);
+                setState(() => _isFabExpanded = false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavouritesScreen(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.favorite, color: Colors.white),
+            ),
+          ),
+          // Settings button (shown when expanded)
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: FloatingActionButton(
+              heroTag: 'settings',
+              backgroundColor: const Color(0xFFDC0A2D),
+              onPressed: () {
+                soundService.playSound(SoundEffect.click);
+                setState(() => _isFabExpanded = false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.settings, color: Colors.white),
+            ),
+          ),
+        ],
+        // Main FAB button
+        FloatingActionButton(
+          heroTag: 'main',
+          backgroundColor: const Color(0xFFDC0A2D),
+          onPressed: () {
+            soundService.playSound(SoundEffect.click);
+            setState(() => _isFabExpanded = !_isFabExpanded);
+          },
+          child: AnimatedRotation(
+            turns: _isFabExpanded ? 0.5 : 0.0, // 45 degrees when expanded
+            duration: const Duration(milliseconds: 200),
+            child: Icon(
+              _isFabExpanded ? Icons.close : Icons.more_horiz,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
