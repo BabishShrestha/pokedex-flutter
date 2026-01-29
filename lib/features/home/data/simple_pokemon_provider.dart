@@ -87,9 +87,8 @@ class SimplePokemonListState {
   }
 }
 
-/// Notifier for simple Pokemon list with pagination
+/// Notifier for simple Pokemon list
 class SimplePokemonListNotifier extends Notifier<SimplePokemonListState> {
-  static const int pageSize = 20;
   static const int maxPokemon = 1025; // All Pokemon up to Gen 9
 
   @override
@@ -120,73 +119,53 @@ class SimplePokemonListNotifier extends Notifier<SimplePokemonListState> {
     return const SimplePokemonListState();
   }
 
-  /// Load next batch of Pokemon from list endpoint
+  /// Load all Pokemon from cache or API
   Future<void> loadMore() async {
     if (state.isLoading || !state.hasMore) return;
 
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      // Try to load from cache first if starting fresh
-      if (state.offset == 0) {
-        final cache = ref.read(cacheRepositoryProvider);
-        final cachedPokemon = await cache.getPokemonList();
+      // Try to load from cache first
+      final cache = ref.read(cacheRepositoryProvider);
+      final cachedPokemon = await cache.getPokemonList();
 
-        if (cachedPokemon != null && cachedPokemon.isNotEmpty) {
-          print('Loaded ${cachedPokemon.length} Pokemon from cache');
-
-          // Load first page from cache
-          final firstPage = cachedPokemon.take(pageSize).toList();
-          state = state.copyWith(
-            pokemon: firstPage,
-            isLoading: false,
-            hasMore: cachedPokemon.length < maxPokemon,
-            offset: pageSize,
-          );
-          return;
-        }
-      }
-
-      final dio = ref.read(dioProvider);
-      final offset = state.offset;
-
-      if (offset >= maxPokemon) {
-        state = state.copyWith(isLoading: false, hasMore: false);
+      if (cachedPokemon != null && cachedPokemon.length >= maxPokemon) {
+        print('Loaded all ${cachedPokemon.length} Pokemon from cache');
+        state = state.copyWith(
+          pokemon: cachedPokemon,
+          allPokemon: cachedPokemon,
+          isLoading: false,
+          hasMore: false,
+          offset: maxPokemon,
+        );
         return;
       }
 
-      // Single API call to get the list
-      final response = await dio.get('pokemon?limit=$pageSize&offset=$offset');
+      // Load all Pokemon from API in one request
+      final dio = ref.read(dioProvider);
+      final response = await dio.get('pokemon?limit=$maxPokemon&offset=0');
 
       if (response.statusCode == 200) {
         final results = response.data['results'] as List;
-        final newPokemon = results
+        final allPokemon = results
             .map(
               (json) =>
                   SimplePokemon.fromListJson(json as Map<String, dynamic>),
             )
             .toList();
 
-        final allPokemon = [...state.pokemon, ...newPokemon];
-
         state = state.copyWith(
           pokemon: allPokemon,
-          allPokemon: allPokemon, // Store full list for filtering
+          allPokemon: allPokemon,
           isLoading: false,
-          hasMore: allPokemon.length < maxPokemon,
-          offset: offset + pageSize,
+          hasMore: false,
+          offset: maxPokemon,
         );
 
-        // Cache the full list periodically
-        if (allPokemon.length >= 151 && allPokemon.length % 151 == 0) {
-          final cache = ref.read(cacheRepositoryProvider);
-          await cache.savePokemonList(allPokemon);
-          print('Cached ${allPokemon.length} Pokemon to storage');
-        }
-
-        print(
-          'Loaded ${newPokemon.length} Pokemon, Total: ${allPokemon.length}',
-        );
+        // Cache the full list
+        await cache.savePokemonList(allPokemon);
+        print('Loaded and cached all ${allPokemon.length} Pokemon');
       } else {
         throw Exception('Failed to load Pokemon list: ${response.statusCode}');
       }
@@ -197,10 +176,23 @@ class SimplePokemonListNotifier extends Notifier<SimplePokemonListState> {
     }
   }
 
-  /// Refresh the list
+  /// Refresh the list while preserving filter state
   Future<void> refresh() async {
-    state = const SimplePokemonListState();
+    // Reset to initial state but keep search/filter mode info
+    state = state.copyWith(
+      pokemon: [],
+      allPokemon: [],
+      isLoading: false,
+      hasMore: true,
+      offset: 0,
+      error: null,
+    );
+
+    // Reload all Pokemon
     await loadMore();
+
+    // Reapply any active filters
+    applyFilters();
   }
 
   /// Search for a specific Pokemon by name or ID

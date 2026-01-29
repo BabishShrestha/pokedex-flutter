@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/core/services/connectivity_service.dart';
 import 'package:pokedex/core/services/sound_service.dart';
 import 'package:pokedex/core/widgets/pokemon_loader.dart';
 import 'package:pokedex/features/home/data/simple_pokemon_provider.dart';
@@ -10,6 +11,7 @@ import 'package:pokedex/features/home/presentation/widgets/generation_filter_chi
 import 'package:pokedex/features/home/presentation/widgets/type_filter_chips.dart';
 import 'package:pokedex/features/pokemon_details/figma_pokemon_detail_screen.dart';
 import 'package:pokedex/features/pokemon_details/pokemon_detail_provider.dart';
+import 'package:pokedex/features/settings/settings_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SimpleHomeScreen extends ConsumerStatefulWidget {
@@ -23,12 +25,14 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _searchController = TextEditingController();
   Timer? _debounceTimer;
+  Timer? _prefetchTimer;
+  final Set<int> _prefetchedIds = {};
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_onScroll);
     _searchController.addListener(_onSearchChanged);
+    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -38,7 +42,56 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
     _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
     _debounceTimer?.cancel();
+    _prefetchTimer?.cancel();
     super.dispose();
+  }
+
+  void _onScroll() {
+    // Debounce pre-fetch to avoid too many calls
+    _prefetchTimer?.cancel();
+    _prefetchTimer = Timer(const Duration(milliseconds: 500), () {
+      _prefetchVisiblePokemon();
+    });
+  }
+
+  Future<void> _prefetchVisiblePokemon() async {
+    // Check if pre-fetch is enabled
+    final prefetchEnabled = await ref.read(prefetchOnScrollProvider.future);
+    if (!prefetchEnabled) return;
+
+    final pokemonState = ref.read(simplePokemonListProvider);
+    if (pokemonState.pokemon.isEmpty) return;
+
+    // Calculate visible range based on scroll position
+    final scrollPosition = _scrollController.position.pixels;
+    final viewportHeight = _scrollController.position.viewportDimension;
+
+    // Approximate: 3 columns, each item ~120px height
+    const itemHeight = 140.0;
+    const columns = 3;
+
+    final firstVisibleIndex = (scrollPosition / itemHeight * columns).floor();
+    final lastVisibleIndex =
+        ((scrollPosition + viewportHeight) / itemHeight * columns).ceil();
+
+    // Pre-fetch a few items ahead
+    final startIndex = firstVisibleIndex.clamp(
+      0,
+      pokemonState.pokemon.length - 1,
+    );
+    final endIndex = (lastVisibleIndex + 6).clamp(
+      0,
+      pokemonState.pokemon.length - 1,
+    );
+
+    for (int i = startIndex; i <= endIndex; i++) {
+      final pokemon = pokemonState.pokemon[i];
+      if (!_prefetchedIds.contains(pokemon.id)) {
+        _prefetchedIds.add(pokemon.id);
+        // Trigger the provider to pre-fetch (it will cache automatically)
+        ref.read(pokemonDetailProvider(pokemon.id));
+      }
+    }
   }
 
   void _onSearchChanged() {
@@ -55,13 +108,6 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
         ref.read(simplePokemonListProvider.notifier).clearSearch();
       }
     });
-  }
-
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent * 0.9) {
-      ref.read(simplePokemonListProvider.notifier).loadMore();
-    }
   }
 
   @override
@@ -105,6 +151,20 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            const Spacer(),
+            // Settings button
+            GestureDetector(
+              onTap: () {
+                soundService.playSound(SoundEffect.click);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.settings, color: Colors.white),
             ),
           ],
         ),
@@ -206,232 +266,308 @@ class _SimpleHomeScreenState extends ConsumerState<SimpleHomeScreen> {
           ),
         ),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await ref.read(simplePokemonListProvider.notifier).refresh();
-        },
-        child: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            // Generation filter chips
-            const SliverToBoxAdapter(child: GenerationFilterChips()),
-            // Type filter chips
-            const SliverToBoxAdapter(child: TypeFilterChips()),
-            if (pokemonState.pokemon.isEmpty && pokemonState.isLoading)
-              const SliverFillRemaining(
-                child: Center(child: PokemonLoader(size: 100)),
-              )
-            else if (pokemonState.pokemon.isEmpty && pokemonState.error != null)
-              SliverFillRemaining(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.error, size: 64, color: Colors.red),
-                      const SizedBox(height: 16),
-                      Text('Error: ${pokemonState.error}'),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          ref
-                              .read(simplePokemonListProvider.notifier)
-                              .refresh();
-                        },
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            else if (displayPokemon.isEmpty)
-              SliverFillRemaining(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.search_off, size: 64, color: Colors.grey[400]),
-                      const SizedBox(height: 16),
-                      Text(
-                        pokemonState.error ?? 'No Pokémon found',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      if (pokemonState.isSearchMode) ...[
-                        const SizedBox(height: 8),
-                        Text(
-                          'Try searching by name or ID (e.g., "pikachu" or "25")',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[500],
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () {
-                            soundService.playSound(SoundEffect.click);
-                            ref
-                                .read(simplePokemonListProvider.notifier)
-                                .clearSearch();
-                            _searchController.clear();
-                          },
-                          child: const Text('Clear Search'),
-                        ),
+      body: Column(
+        children: [
+          // Offline indicator
+          _buildOfflineIndicator(),
+          // Main content
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await ref.read(simplePokemonListProvider.notifier).refresh();
+              },
+              child: CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  // Generation filter chips
+                  SliverAppBar(
+                    floating: true,
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.white,
+                    elevation: 0,
+                    toolbarHeight: 100,
+                    title: Column(
+                      children: [
+                        const GenerationFilterChips(),
+                        const TypeFilterChips(),
                       ],
-                    ],
+                    ),
                   ),
-                ),
-              )
-            else
-              SliverPadding(
-                padding: const EdgeInsets.all(12),
-                sliver: SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 0.8,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final pokemon = displayPokemon[index];
-
-                    return GestureDetector(
-                      onTap: () async {
-                        // Play sound asynchronously without awaiting
-                        soundService.playSound(SoundEffect.click);
-
-                        // Show loading overlay immediately
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          barrierColor: Colors.black.withOpacity(0.3),
-                          builder: (context) =>
-                              const Center(child: PokemonLoader(size: 80)),
-                        );
-
-                        // Prefetch Pokemon details
-                        try {
-                          await ref.read(
-                            pokemonDetailProvider(pokemon.id).future,
-                          );
-
-                          // Close loading overlay
-                          if (context.mounted) {
-                            Navigator.pop(context);
-
-                            // Navigate to detail screen
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    FigmaPokemonDetailScreen(pokemon: pokemon),
-                              ),
-                            );
-                          }
-                        } catch (e) {
-                          // Close loading overlay
-                          if (context.mounted) {
-                            Navigator.pop(context);
-
-                            // Show error snackbar
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Error loading Pokémon: $e'),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          }
-                        }
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.08),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
+                  if (pokemonState.pokemon.isEmpty && pokemonState.isLoading)
+                    const SliverFillRemaining(
+                      child: Center(child: PokemonLoader(size: 100)),
+                    )
+                  else if (pokemonState.pokemon.isEmpty &&
+                      pokemonState.error != null)
+                    SliverFillRemaining(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.error,
+                              size: 64,
+                              color: Colors.red,
+                            ),
+                            const SizedBox(height: 16),
+                            Text('Error: ${pokemonState.error}'),
+                            const SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {
+                                ref
+                                    .read(simplePokemonListProvider.notifier)
+                                    .refresh();
+                              },
+                              child: const Text('Retry'),
                             ),
                           ],
                         ),
+                      ),
+                    )
+                  else if (displayPokemon.isEmpty)
+                    SliverFillRemaining(
+                      child: Center(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // ID Number
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  '#${pokemon.id.toString().padLeft(3, '0')}',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Colors.grey[600],
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
+                            Icon(
+                              Icons.search_off,
+                              size: 64,
+                              color: Colors.grey[400],
                             ),
-                            // Pokemon Image
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: Hero(
-                                  tag: 'pokemon-${pokemon.id}',
-                                  child: CachedNetworkImage(
-                                    imageUrl: pokemon.imageUrl,
-                                    fit: BoxFit.contain,
-                                    placeholder: (context, url) => const Center(
-                                      child: PokemonLoaderSmall(size: 35),
-                                    ),
-                                    errorWidget: (context, url, error) => Icon(
-                                      Icons.catching_pokemon,
-                                      size: 40,
-                                      color: Colors.grey[300],
-                                    ),
-                                  ),
-                                ),
+                            const SizedBox(height: 16),
+                            Text(
+                              pokemonState.error ?? 'No Pokémon found',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey[600],
+                                fontWeight: FontWeight.w500,
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                            // Pokemon Name
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
-                              child: Text(
-                                pokemon.name[0].toUpperCase() +
-                                    pokemon.name.substring(1),
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
+                            if (pokemonState.isSearchMode) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                'Try searching by name or ID (e.g., "pikachu" or "25")',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey[500],
                                 ),
                                 textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
+                              const SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: () {
+                                  soundService.playSound(SoundEffect.click);
+                                  ref
+                                      .read(simplePokemonListProvider.notifier)
+                                      .clearSearch();
+                                  _searchController.clear();
+                                },
+                                child: const Text('Clear Search'),
+                              ),
+                            ],
                           ],
                         ),
                       ),
-                    );
-                  }, childCount: displayPokemon.length),
-                ),
+                    )
+                  else
+                    SliverPadding(
+                      padding: const EdgeInsets.all(12),
+                      sliver: SliverGrid(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 0.8,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 8,
+                            ),
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final pokemon = displayPokemon[index];
+
+                          return GestureDetector(
+                            onTap: () async {
+                              // Play sound asynchronously without awaiting
+                              soundService.playSound(SoundEffect.click);
+
+                              // Show loading overlay immediately
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                barrierColor: Colors.black.withOpacity(0.3),
+                                builder: (context) => const Center(
+                                  child: PokemonLoader(size: 80),
+                                ),
+                              );
+
+                              // Prefetch Pokemon details
+                              try {
+                                await ref.read(
+                                  pokemonDetailProvider(pokemon.id).future,
+                                );
+
+                                // Close loading overlay
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+
+                                  // Navigate to detail screen
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FigmaPokemonDetailScreen(
+                                            pokemon: pokemon,
+                                          ),
+                                    ),
+                                  );
+                                }
+                              } catch (e) {
+                                // Close loading overlay
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+
+                                  // Show error snackbar
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Error loading Pokémon: $e',
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.08),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  // ID Number
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        '#${pokemon.id.toString().padLeft(3, '0')}',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.grey[600],
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // Pokemon Image
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      child: Hero(
+                                        tag: 'pokemon-${pokemon.id}',
+                                        child: CachedNetworkImage(
+                                          imageUrl: pokemon.imageUrl,
+                                          fit: BoxFit.contain,
+                                          placeholder: (context, url) =>
+                                              const Center(
+                                                child: PokemonLoaderSmall(
+                                                  size: 35,
+                                                ),
+                                              ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(
+                                                Icons.catching_pokemon,
+                                                size: 40,
+                                                color: Colors.grey[300],
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // Pokemon Name
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      8,
+                                      0,
+                                      8,
+                                      12,
+                                    ),
+                                    child: Text(
+                                      pokemon.name[0].toUpperCase() +
+                                          pokemon.name.substring(1),
+                                      style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black87,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }, childCount: displayPokemon.length),
+                      ),
+                    ),
+                  if (pokemonState.isLoading && pokemonState.pokemon.isNotEmpty)
+                    const SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Center(child: PokemonLoaderSmall(size: 60)),
+                      ),
+                    ),
+                ],
               ),
-            if (pokemonState.isLoading && pokemonState.pokemon.isNotEmpty)
-              const SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Center(child: PokemonLoaderSmall(size: 60)),
-                ),
-              ),
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildOfflineIndicator() {
+    final isOnlineAsync = ref.watch(isOnlineProvider);
+
+    return isOnlineAsync.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+      data: (isOnline) {
+        if (isOnline) return const SizedBox.shrink();
+
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          color: Colors.orange[700],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.wifi_off, color: Colors.white, size: 16),
+              const SizedBox(width: 8),
+              const Text(
+                'You are offline - Using cached data',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

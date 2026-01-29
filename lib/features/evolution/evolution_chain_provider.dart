@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/core/cache/cache_repository.dart';
 import 'package:pokedex/core/dio/dio_client.dart';
 
 /// Evolution chain member
@@ -138,12 +139,13 @@ EvolutionMember _parseChainLink(Map<String, dynamic> chainLink) {
   );
 }
 
-/// Provider to fetch evolution chain for a Pokemon ID
+/// Provider to fetch evolution chain for a Pokemon ID with caching
 final evolutionChainProvider = FutureProvider.family<EvolutionChain?, int>((
   ref,
   pokemonId,
 ) async {
   final dio = ref.watch(dioProvider);
+  final cache = ref.watch(cacheRepositoryProvider);
 
   try {
     // First, get Pokemon species to get evolution chain URL
@@ -168,7 +170,14 @@ final evolutionChainProvider = FutureProvider.family<EvolutionChain?, int>((
 
     final chainId = int.parse(chainIdMatch.group(1)!);
 
-    // Fetch evolution chain
+    // Try to load from cache first
+    final cachedChain = await cache.getEvolutionChain(chainId);
+    if (cachedChain != null) {
+      print('Loaded evolution chain $chainId from cache');
+      return cachedChain;
+    }
+
+    // Fetch evolution chain from API
     final chainResponse = await dio.get('evolution-chain/$chainId');
 
     if (chainResponse.statusCode != 200) {
@@ -178,7 +187,13 @@ final evolutionChainProvider = FutureProvider.family<EvolutionChain?, int>((
     final chainData = chainResponse.data['chain'] as Map<String, dynamic>;
     final baseSpecies = _parseChainLink(chainData);
 
-    return EvolutionChain(chainId: chainId, baseSpecies: baseSpecies);
+    final evolutionChain = EvolutionChain(chainId: chainId, baseSpecies: baseSpecies);
+
+    // Save to cache
+    await cache.saveEvolutionChain(chainId, evolutionChain);
+    print('Cached evolution chain $chainId');
+
+    return evolutionChain;
   } catch (e) {
     print('Error fetching evolution chain for Pokemon $pokemonId: $e');
     return null;

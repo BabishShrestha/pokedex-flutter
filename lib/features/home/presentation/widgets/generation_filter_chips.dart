@@ -64,7 +64,9 @@ class GenerationFilterChips extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
+              showCheckmark: false,
               label: Text(gen.displayName),
+              visualDensity: VisualDensity.compact,
               selected: isSelected,
               onSelected: (_) {
                 soundService.playSound(SoundEffect.click);

@@ -16,6 +16,10 @@ void main() async {
   Hive.registerAdapter(PokemonAbilityAdapter());
   Hive.registerAdapter(PokemonStatAdapter());
   Hive.registerAdapter(PokemonDetailAdapter());
+  Hive.registerAdapter(PokemonSpeciesAdapter());
+  Hive.registerAdapter(EvolutionTriggerAdapter());
+  Hive.registerAdapter(EvolutionMemberAdapter());
+  Hive.registerAdapter(EvolutionChainAdapter());
 
   runApp(const ProviderScope(child: MyApp()));
 }

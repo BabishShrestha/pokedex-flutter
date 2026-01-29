@@ -28,6 +28,9 @@ class TypeFilterChips extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: FilterChip(
+              showCheckmark: false,
+              visualDensity: VisualDensity.compact,
+              labelPadding: const EdgeInsets.symmetric(horizontal: 12),
               label: Text(typeName[0].toUpperCase() + typeName.substring(1)),
               selected: isSelected,
               onSelected: (_) {

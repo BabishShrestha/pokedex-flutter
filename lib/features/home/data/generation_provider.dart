@@ -86,12 +86,15 @@ class GenerationFilterState {
 
   GenerationFilterState copyWith({
     int? selectedGeneration,
+    bool clearSelection = false,
     Map<int, Generation>? generationsData,
     bool? isLoading,
     String? error,
   }) {
     return GenerationFilterState(
-      selectedGeneration: selectedGeneration,
+      selectedGeneration: clearSelection
+          ? null
+          : (selectedGeneration ?? this.selectedGeneration),
       generationsData: generationsData ?? this.generationsData,
       isLoading: isLoading ?? this.isLoading,
       error: error,
@@ -100,7 +103,7 @@ class GenerationFilterState {
 
   /// Clear selected generation (show all)
   GenerationFilterState clearSelection() {
-    return copyWith(selectedGeneration: null);
+    return copyWith(clearSelection: true);
   }
 }
 
@@ -115,14 +118,15 @@ class GenerationFilterNotifier extends Notifier<GenerationFilterState> {
   Future<void> selectGeneration(int generation) async {
     if (generation < 1 || generation > 9) return;
 
-    state = state.copyWith(selectedGeneration: generation, isLoading: true);
+    state = state.copyWith(isLoading: true);
 
     // Load generation data if not already cached
     if (!state.generationsData.containsKey(generation)) {
       await _loadGenerationData(generation);
-    } else {
-      state = state.copyWith(isLoading: false);
     }
+
+    // Set selected generation AFTER data is loaded
+    state = state.copyWith(selectedGeneration: generation, isLoading: false);
   }
 
   /// Clear generation filter (show all Pokemon)
@@ -146,7 +150,6 @@ class GenerationFilterNotifier extends Notifier<GenerationFilterState> {
 
         state = state.copyWith(
           generationsData: {...state.generationsData, generation: gen},
-          isLoading: false,
         );
         return;
       }
@@ -163,7 +166,6 @@ class GenerationFilterNotifier extends Notifier<GenerationFilterState> {
 
         state = state.copyWith(
           generationsData: {...state.generationsData, generation: gen},
-          isLoading: false,
         );
       } else {
         throw Exception('Failed to load generation: ${response.statusCode}');
